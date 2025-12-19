@@ -24,6 +24,7 @@
     zed-editor
     onlyoffice-desktopeditors
     qutebrowser
+    spotify-player
 
     (makeDesktopItem {
       name = "grand-line-adventures";
