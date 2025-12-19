@@ -23,6 +23,7 @@
     google-chrome
     zed-editor
     onlyoffice-desktopeditors
+    qutebrowser
 
     (makeDesktopItem {
       name = "grand-line-adventures";
