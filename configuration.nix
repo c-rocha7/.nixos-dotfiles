@@ -172,6 +172,7 @@
   virtualisation = {
     docker.enable = true;
     waydroid.enable = true;
+    waydroid.package = pkgs.waydroid-nftables;
   };
 
   nixpkgs.config.allowUnfree = true;
