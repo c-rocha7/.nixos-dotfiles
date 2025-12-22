@@ -11,8 +11,15 @@
 
   boot.kernelPackages = pkgs.linuxPackages_zen;
 
-  boot.kernelParams = [ "amd_pstate=disable" ];
+  boot.kernelParams = [
+    "amd_pstate=disable"
+    "kernel.split_lock_mitigate=0"
+  ];
   boot.supportedFilesystems = [ "ntfs" ];
+
+  environment.shells = with pkgs; [ zsh ];
+  users.defaultUserShell = pkgs.zsh;
+  programs.zsh.enable = true;
 
   # SSD 512 GB
   fileSystems."/home/cauanixos/Jogos/ssd-512-gb" = {
@@ -130,7 +137,25 @@
 
   programs.firefox.enable = true;
 
-  programs.steam.enable = true;
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true;
+    dedicatedServer.openFirewall = true;
+    gamescopeSession.enable = true;
+    package = pkgs.steam.override {
+      extraPkgs = pkgs: with pkgs; [
+        libva
+        udev
+        pciutils
+        xorg.libXScrnSaver
+        gst_all_1.gst-plugins-bad
+        gst_all_1.gst-plugins-good
+        gst_all_1.gst-plugins-base
+        gst_all_1.gst-plugins-ugly
+        gst_all_1.gst-libav
+      ];
+    };
+  };
 
   programs.gamemode.enable = true;
 
@@ -185,19 +210,24 @@
     wget
     micro
     git
-    docker-compose
+    unstable.docker-compose
     php
     php.packages.composer
     nodejs_24
     python314
-    lazygit
-    lazydocker
+    unstable.lazygit
+    unstable.lazydocker
     ntfs3g
-    fastfetch
+    unstable.fastfetch
     p7zip
     file
     inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
+    unstable.steam-run
   ];
+
+  environment.sessionVariables = {
+    MESA_SHADER_CACHE_MAX_SIZE = "12G";
+  };
 
   fonts.packages = with pkgs; [
     noto-fonts
