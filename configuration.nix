@@ -54,6 +54,17 @@
     graphics = {
       enable = true;
       enable32Bit = true;
+
+      extraPackages = with pkgs; [
+        libva-vdpau-driver
+        libvdpau-va-gl
+        rocmPackages.clr.icd
+      ];
+
+      extraPackages32 = with pkgs.pkgsi686Linux; [
+        libva-vdpau-driver
+        libvdpau-va-gl
+      ];
     };
   };
 
@@ -90,10 +101,12 @@
 
   services.printing.enable = true;
 
-  services.displayManager.ly.enable = true;
+  # services.displayManager.ly.enable = true;
 
   # KDE Plasma
   services.desktopManager.plasma6.enable = true;
+  services.displayManager.sddm.enable = true;
+  services.displayManager.sddm.wayland.enable = true;
 
   # Gnome
   # services.desktopManager.gnome.enable = true;
