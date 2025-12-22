@@ -14,6 +14,36 @@ let
     startupNotify = true;
     startupWMClass = "glaclient-linux";
   };
+  
+  workAndDev = with pkgs; [
+    tree
+  ];
+
+  browsers = with pkgs.unstable; [
+    microsoft-edge
+    chromium
+    google-chrome
+    qutebrowser
+    mullvad-browser
+  ];
+
+  mediaAndSocial = with pkgs.unstable; [
+    spotify
+    spotify-player
+    vesktop
+    mpv
+    obsidian
+  ];
+
+  editorsAndTools = with pkgs.unstable; [
+    vscode
+    zed-editor
+    onlyoffice-desktopeditors
+    yazi
+    kitty
+    gnome-boxes
+  ];
+
 in
 {
   imports = [
@@ -25,17 +55,11 @@ in
     homeDirectory = "/home/cauanixos";
     stateVersion = "25.11";
 
-    packages = (with pkgs; [
-      tree 
-      grandLineAdventures 
-    ]) ++ (with pkgs.unstable; [
-      heroic protonplus obsidian spotify vscode 
-      vesktop mpv microsoft-edge mullvad-browser 
-      chromium yazi google-chrome zed-editor 
-      onlyoffice-desktopeditors qutebrowser 
-      spotify-player zsh-powerlevel10k 
-      gnome-boxes kitty
-    ]);
+    packages = workAndDev 
+      ++ browsers 
+      ++ mediaAndSocial 
+      ++ editorsAndTools 
+      ++ [ grandLineAdventures ];
 
     file.".p10k.zsh".source = ./config/p10k.zsh;
   };
@@ -52,6 +76,7 @@ in
       "..." = "cd ../..";
       ff = "fastfetch";
       la = "ls -a";
+      nix-switch = "git add . && sudo nixos-rebuild switch --flake .";
     };
 
     plugins = [
