@@ -3,6 +3,8 @@
 {
   imports = [
     ./hardware-configuration.nix
+    ./modules/gaming.nix
+    ./modules/virtualization.nix
   ];
 
   # ========================================
@@ -162,75 +164,12 @@
 
   programs.firefox.enable = true;
 
-  programs.steam = {
-    enable = true;
-    remotePlay.openFirewall = true;
-    dedicatedServer.openFirewall = true;
-    gamescopeSession.enable = true;
-    package = pkgs.steam.override {
-      extraPkgs = pkgs: with pkgs; [
-        libva
-        udev
-        pciutils
-        xorg.libXScrnSaver
-        gst_all_1.gst-plugins-bad
-        gst_all_1.gst-plugins-good
-        gst_all_1.gst-plugins-base
-        gst_all_1.gst-plugins-ugly
-        gst_all_1.gst-libav
-      ];
-    };
-  };
-
-  programs.gamemode.enable = true;
-
-  programs.nix-ld.enable = true;
-  programs.nix-ld.libraries = with pkgs; [
-    # Essenciais
-    stdenv.cc.cc.lib
-    zlib
-    fuse3
-    icu
-    dbus
-    expat
-
-    # Gráficos
-    libGL
-    fontconfig
-    freetype
-    xorg.libX11
-    xorg.libXcursor
-    xorg.libXrandr
-    xorg.libXi
-
-    # Rede/Segurança
-    openssl
-    curl
-    nss
-    nspr
-
-    # Áudio
-    libpulseaudio
-    alsa-lib
-  ];
-
   programs.obs-studio = {
     enable = true;
     plugins = with pkgs.obs-studio-plugins; [
       obs-pipewire-audio-capture
       obs-vkcapture
     ];
-  };
-
-  # ========================================
-  # Virtualização
-  # ========================================
-
-  virtualisation = {
-    docker.enable = true;
-    waydroid.enable = true;
-    waydroid.package = pkgs.waydroid-nftables;
-    libvirtd.enable = true;
   };
 
   # ========================================

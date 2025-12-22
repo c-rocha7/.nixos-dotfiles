@@ -63,10 +63,6 @@ in
     ];
 
     initContent = ''
-      # Carrega o tema Powerlevel10k configurado via plugins
-      source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
-      
-      # Carrega sua configuração personalizada do p10k
       [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
     '';
   };
