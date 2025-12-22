@@ -1,4 +1,4 @@
-{ config, lib, pkgs, inputs, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   imports =
@@ -10,63 +10,6 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   boot.kernelPackages = pkgs.linuxPackages_zen;
-
-  boot.kernelParams = [
-    "amd_pstate=disable"
-    "kernel.split_lock_mitigate=0"
-  ];
-  boot.supportedFilesystems = [ "ntfs" ];
-
-  environment.shells = with pkgs; [ zsh ];
-  users.defaultUserShell = pkgs.zsh;
-  programs.zsh.enable = true;
-
-  # SSD 512 GB
-  fileSystems."/home/cauanixos/Jogos/ssd-512-gb" = {
-    device = "/dev/disk/by-uuid/F002C0CA02C096CE";
-    fsType = "ntfs3";
-    options = [
-      "defaults"
-      "uid=1000"
-      "gid=100"
-      "nofail"
-      "windows_names"
-    ];
-  };
-
-  # HD 1 TB
-  fileSystems."/home/cauanixos/Jogos/hd-1-tb" = {
-    device = "/dev/disk/by-uuid/2ED6CE36D6CDFDD9";
-    fsType = "ntfs3";
-    options = [
-      "defaults"
-      "uid=1000"
-      "gid=100"
-      "nofail"
-      "windows_names"
-    ];
-  };
-
-  hardware = {
-    enableAllFirmware = true;
-    firmware = [ pkgs.linux-firmware ];
-
-    graphics = {
-      enable = true;
-      enable32Bit = true;
-
-      extraPackages = with pkgs; [
-        libva-vdpau-driver
-        libvdpau-va-gl
-        rocmPackages.clr.icd
-      ];
-
-      extraPackages32 = with pkgs.pkgsi686Linux; [
-        libva-vdpau-driver
-        libvdpau-va-gl
-      ];
-    };
-  };
 
   networking.hostName = "nixos";
 
@@ -94,33 +37,55 @@
     variant = "alt-intl";
   };
 
-  services.xserver = {
-    enable = true;
-    videoDrivers = [ "amdgpu" ];
-  };
-
   services.printing.enable = true;
 
-  # services.displayManager.ly.enable = true;
+  services.greetd = {
+    enable = true;
+    settings = {
+      default_session = {
+        command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd Hyprland --remember --asterisks";
+        user = "greeter";
+      };
+    };
+  };
 
-  # KDE Plasma
-  services.desktopManager.plasma6.enable = true;
-  services.displayManager.sddm.enable = true;
-  services.displayManager.sddm.wayland.enable = true;
+  hardware.enableRedistributableFirmware = true;
+  hardware.firmware = with pkgs; [ linux-firmware ];
 
-  # Gnome
-  # services.desktopManager.gnome.enable = true;
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+    extraPackages = with pkgs; [
+      mesa-demos
+      vulkan-tools
+    ];
+  };
 
-  # Cosmic
-  # services.desktopManager.cosmic.enable = true;
-  # services.desktopManager.cosmic.xwayland.enable = true;
+  hardware.amdgpu = {
+    initrd.enable = true;
+  };
 
-  # Hyprland
-  # programs.hyprland = {
-  #   enable = true;
-  #   xwayland.enable = true;
-  # };
+  programs.hyprland = {
+    enable = true;
+    xwayland.enable = true;
+  };
 
+  xdg.portal = {
+    enable = true;
+    extraPortals = [
+      pkgs.xdg-desktop-portal-hyprland
+      pkgs.xdg-desktop-portal-gtk
+      pkgs.kdePackages.xdg-desktop-portal-kde
+    ];
+    config = {
+      common = { default = [ "hyprland" "kde" ]; };
+      hyprland = { default = [ "hyprland" "kde" ]; };
+    };
+  };
+
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+
+  security.rtkit.enable = true;
   services.pulseaudio.enable = false;
   services.pipewire = {
     enable = true;
@@ -131,89 +96,23 @@
     wireplumber.enable = true;
   };
 
-  services.flatpak.enable = true;
-  systemd.services.flatpak-repo = {
-    wantedBy = [ "multi-user.target" ];
-    path = [ pkgs.flatpak ];
-    script = ''
-      flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-    '';
-  };
-
-  security.rtkit.enable = true;
-  security.polkit.enable = true;
-
   users.users.cauanixos = {
     isNormalUser = true;
-    extraGroups = [ "networkmanager" "wheel" "docker" ];
+    extraGroups = [ "networkmanager" "wheel" ];
+    packages = with pkgs; [
+      tree
+    ];
   };
 
   programs.firefox.enable = true;
 
-  programs.steam = {
+  programs.gamemode = {
     enable = true;
-    remotePlay.openFirewall = true;
-    dedicatedServer.openFirewall = true;
-    gamescopeSession.enable = true;
-    package = pkgs.steam.override {
-      extraPkgs = pkgs: with pkgs; [
-        libva
-        udev
-        pciutils
-        xorg.libXScrnSaver
-        gst_all_1.gst-plugins-bad
-        gst_all_1.gst-plugins-good
-        gst_all_1.gst-plugins-base
-        gst_all_1.gst-plugins-ugly
-        gst_all_1.gst-libav
-      ];
+    settings = {
+      general = {
+        renice = 10;
+      };
     };
-  };
-
-  programs.gamemode.enable = true;
-
-  programs.nix-ld.enable = true;
-  programs.nix-ld.libraries = with pkgs; [
-    # Essenciais e Sistema
-    stdenv.cc.cc.lib
-    zlib
-    fuse3
-    icu
-    dbus
-    expat
-
-    # Gráficos e Interface
-    libGL
-    fontconfig
-    freetype
-    xorg.libX11
-    xorg.libXcursor
-    xorg.libXrandr
-    xorg.libXi
-
-    # Rede e Segurança
-    openssl
-    curl
-    nss
-    nspr
-
-    # Áudio
-    libpulseaudio
-    alsa-lib
-  ];
-
-  programs.obs-studio = {
-    enable = true;
-    plugins = with pkgs.obs-studio-plugins; [
-      obs-pipewire-audio-capture
-      obs-vkcapture
-    ];
-  };
-
-  virtualisation = {
-    docker.enable = true;
-    waydroid.enable = true;
-    waydroid.package = pkgs.waydroid-nftables;
   };
 
   nixpkgs.config.allowUnfree = true;
@@ -223,36 +122,78 @@
     wget
     micro
     git
-    unstable.docker-compose
-    php
-    php.packages.composer
-    nodejs_24
-    python314
-    unstable.lazygit
-    unstable.lazydocker
-    ntfs3g
-    unstable.fastfetch
+    kitty
+    fastfetch
+    gst_all_1.gstreamer
+    gst_all_1.gst-libav
+    gst_all_1.gst-plugins-base
+    gst_all_1.gst-plugins-good
+    gst_all_1.gst-plugins-bad
+    gst_all_1.gst-plugins-ugly
+    flatpak
+    xdg-desktop-portal-gtk
+    zip
+    unzip
     p7zip
-    file
-    inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
-    unstable.steam-run
+    unrar
+    arj
+    networkmanagerapplet
+    cava
+    bat
+    eza
+    hyprlock
+    hyprshot
+    waybar
+    kitty
+    rofi
+    pavucontrol
+    kdePackages.dolphin
+    kdePackages.dolphin-plugins
+    kdePackages.ark
+    kdePackages.kio-admin
+    kdePackages.kio-extras
+    kdePackages.kio-fuse
+    kdePackages.breeze-icons
+    kdePackages.kdegraphics-thumbnailers
+    libsForQt5.kinit
+    kdePackages.kservice
+    kdePackages.polkit-kde-agent-1
+    libsForQt5.qt5.qtwayland
+    qt6.qtwayland
+    xdg-desktop-portal-hyprland
+    xdg-desktop-portal-gtk
+    gnome-keyring
+    kdePackages.breeze
+    kdePackages.breeze-gtk
+    papirus-icon-theme
+    nwg-look
+    kdePackages.kde-cli-tools
+    cpio
+    swaynotificationcenter
+    wlogout
+    vscode
+    libsForQt5.qt5ct
+    kdePackages.qt6ct
+    waypaper
+    swww
+    cliphist
+    wl-clipboard
+    adwaita-icon-theme
   ];
 
-  environment.sessionVariables = {
-    MESA_SHADER_CACHE_MAX_SIZE = "12G";
-  };
+  services.flatpak.enable = true;
 
   fonts.packages = with pkgs; [
+    pkgs.font-awesome
+	nerd-fonts.comic-shanns-mono
+	nerd-fonts.fantasque-sans-mono
+	nerd-fonts.fira-code
+	nerd-fonts.jetbrains-mono
+    nerd-fonts.space-mono    
     noto-fonts
     noto-fonts-cjk-sans
+    noto-fonts-cjk-serif
     noto-fonts-color-emoji
-    pkgs.font-awesome
-    nerd-fonts.hack
-    nerd-fonts.jetbrains-mono
-    nerd-fonts.space-mono
-    nerd-fonts.fantasque-sans-mono
-    nerd-fonts.comic-shanns-mono
-    nerd-fonts.fira-code
   ];
   fonts.fontconfig.enable = true;
 
@@ -264,6 +205,39 @@
   };
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+  stylix.enable = true;
+
+  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-hard.yaml";
+
+  stylix.fonts = {
+    monospace = {
+      package = pkgs.jetbrains-mono;
+      name = "JetBrains Mono";
+    };
+    sansSerif = {
+      package = pkgs.inter;
+      name = "Inter";
+    };
+    serif = {
+      package = pkgs.iosevka;
+      name = "Iosevka";
+    };
+    emoji = {
+      package = pkgs.noto-fonts-color-emoji;
+      name = "Noto Color Emoji";
+    };
+  };
+  
+  stylix.polarity = "dark";
+
+  # stylix.targets.console.enable = true;
+  # stylix.targets.grub.enable = true;  # Tema no GRUB
+  # stylix.targets.plymouth.enable = true;  # Tema no boot
+  # stylix.targets.gnome.enable = true;
+  # stylix.targets.gtk.enable = true;
+  # stylix.targets.qt.enable = true;
+  # stylix.targets.plasma.enable = true;
 
   system.stateVersion = "25.11";
 }
