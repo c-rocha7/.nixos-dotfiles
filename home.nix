@@ -54,6 +54,8 @@ in
 {
   imports = [
     ./config/git.nix
+    # ./modules/hyprland.nix
+    inputs.stylix.homeManagerModules.stylix
   ];
 
   home = {

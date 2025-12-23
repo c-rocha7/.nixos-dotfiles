@@ -1,15 +1,30 @@
 { pkgs, ... }:
 
 {
-  # services.displayManager.sddm.enable = true;
-  # services.displayManager.sddm.wayland.enable = true;
   services.desktopManager.plasma6.enable = true;
+
+  # programs.hyprland = {
+  #   enable = true;
+  #   xwayland.enable = true;
+  # };
+
+  environment.systemPackages = with pkgs; [
+    # waybar
+    # swww
+    # rofi
+    # swaynotificationcenter
+    # wl-clipboard
+    # kdePackages.polkit-kde-agent-1
+    # networkmanagerapplet
+    tuigreet
+  ];
 
   services.greetd = {
     enable = true;
     settings = {
       default_session = {
         command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd startplasma-wayland --remember --asterisks";
+        # command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd Hyprland --remember --asterisks";
         user = "greeter";
       };
     };
@@ -47,6 +62,4 @@
 
   services.printing.enable = true;
   services.upower.enable = true;
-
-  environment.systemPackages = [ pkgs.tuigreet ];
 }

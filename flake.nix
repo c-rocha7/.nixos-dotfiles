@@ -16,9 +16,14 @@
     };
 
     nix-flatpak.url = "github:gmodena/nix-flatpak";
+
+    stylix = {
+      url = "github:nix-community/stylix/release-25.11";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, nix-flatpak, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, nix-flatpak, stylix, ... }@inputs:
     let
       system = "x86_64-linux"; 
 
@@ -37,7 +42,8 @@
         modules = [
           ./configuration.nix
           nix-flatpak.nixosModules.nix-flatpak
-          home-manager.nixosModules.home-manager 
+          home-manager.nixosModules.home-manager
+          stylix.nixosModules.stylix
 
           {
             nixpkgs.overlays = [ unstableOverlay ]; 
