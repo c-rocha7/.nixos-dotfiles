@@ -21,7 +21,7 @@
       capnproto
       mesa
       libva
-      libxkbcommon # Movido para fora do xorg
+      libxkbcommon
       alsa-lib
       cairo
       cups

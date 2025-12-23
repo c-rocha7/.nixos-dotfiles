@@ -42,6 +42,7 @@ let
     yazi
     kitty
     gnome-boxes
+    filezilla
   ];
 
   gamingTools = with pkgs.unstable; [
