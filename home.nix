@@ -44,6 +44,11 @@ let
     gnome-boxes
   ];
 
+  gamingTools = with pkgs.unstable; [
+    heroic
+    protonplus
+  ];
+
 in
 {
   imports = [
@@ -59,6 +64,7 @@ in
       ++ browsers 
       ++ mediaAndSocial 
       ++ editorsAndTools 
+      ++ gamingTools
       ++ [ grandLineAdventures ];
 
     file.".p10k.zsh".source = ./config/p10k.zsh;
