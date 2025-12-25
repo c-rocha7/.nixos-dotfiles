@@ -1,17 +1,10 @@
 { pkgs, ... }:
 
 {
-  # ========================================
-  # Firmware e Microcode
-  # ========================================
-  hardware.enableAllFirmware = true;
-  hardware.cpu.amd.updateMicrocode = true;
-  hardware.enableRedistributableFirmware = true;
-
-  # ========================================
-  # Gráficos e Drivers (AMD)
-  # ========================================
-  services.xserver.videoDrivers = [ "amdgpu" ];
+  services.xserver = {
+    enable = true;
+    videoDrivers = [ "amdgpu" ];
+  };
 
   hardware.graphics = {
     enable = true;
@@ -27,13 +20,8 @@
     ];
   };
 
-  # ========================================
-  # Otimizações de Kernel e Boot
-  # ========================================
   boot.kernelParams = [
     "amd_pstate=disable"
     "kernel.split_lock_mitigate=0"
   ];
-
-  boot.kernelModules = [ "kvm-amd" ];
 }

@@ -1,53 +1,42 @@
 { config, lib, pkgs, inputs, ... }:
 
 {
-  imports = [
-    ./hardware-configuration.nix
-    ./modules/gaming.nix
-    ./modules/virtualization.nix
-    ./modules/desktop.nix
-    ./modules/hardware.nix
-    ./modules/storage.nix
-    ./modules/i18n.nix
-    ./modules/audio.nix
-    ./modules/users.nix
-  ];
-
-  # ========================================
-  # Boot e Kernel
-  # ========================================
+  imports =
+    [
+      ./hardware-configuration.nix
+      ./modules/audio.nix
+      ./modules/desktop.nix
+      ./modules/gaming.nix
+      ./modules/hardware.nix
+      ./modules/i18n.nix
+      ./modules/storage.nix
+      ./modules/users.nix
+      ./modules/virtualization.nix
+    ];
 
   boot.loader = {
-    systemd-boot.enable = true;
-    efi.canTouchEfiVariables = true;
+    systemd-boot.enable = false;
+
+    efi = {
+      canTouchEfiVariables = true;
+    };
+
+    grub = {
+      enable = true;
+      device = "nodev";
+      efiSupport = true;
+      efiInstallAsRemovable = false;
+      useOSProber = false;
+      configurationLimit = 10;
+    };
   };
 
   boot.kernelPackages = pkgs.linuxPackages_zen;
 
-  # ========================================
-  # Rede e Hostname
-  # ========================================
-
   networking.hostName = "nixos";
+
   networking.networkmanager.enable = true;
-  
-  # ========================================
-  # Desktop e Display Manager
-  # ========================================
 
-  services.xserver.enable = true;
-
-  # Outras opções comentadas (descomente se precisar):
-  # services.desktopManager.gnome.enable = true;
-  # services.desktopManager.cosmic.enable = true;
-  # services.desktopManager.cosmic.xwayland.enable = true;
-  # programs.hyprland = { enable = true; xwayland.enable = true; };
-
-  # ========================================
-  # Serviços Gerais
-  # ========================================
-
-  # Flatpak com repositório Flathub
   services.flatpak = {
     enable = true;
     update.auto = {
@@ -67,10 +56,6 @@
     ];
   };
 
-  # ========================================
-  # Programas Específicos
-  # ========================================
-
   programs.firefox.enable = true;
 
   programs.obs-studio = {
@@ -81,53 +66,32 @@
     ];
   };
 
-  # ========================================
-  # Nixpkgs e Nix
-  # ========================================
-
-  nixpkgs.config.allowUnfree = true;
-
-  # ========================================
-  # Ambiente e Pacotes
-  # ========================================
-
   environment.systemPackages = with pkgs; [
     vim
     wget
-    micro
     git
-    unstable.docker-compose
+    micro
     php
     php.packages.composer
     nodejs_24
     python314
-    unstable.lazygit
-    unstable.lazydocker
     ntfs3g
-    unstable.fastfetch
     p7zip
     file
+
+    unstable.fastfetch
+    unstable.lazygit
+    unstable.lazydocker
+    unstable.docker-compose
+
     inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
-    unstable.steam-run
   ];
 
   environment.sessionVariables = {
     MESA_SHADER_CACHE_MAX_SIZE = "12G";
   };
 
-  # ========================================
-  # Scripts de Ativação Customizados
-  # ========================================
-  system.activationScripts.installNavicat = {
-    text = ''
-      # Instala diretamente do arquivo ref sem precisar adicionar remote manualmente
-      ${pkgs.flatpak}/bin/flatpak install -y --from https://dn.navicat.com/flatpak/flatpakref/navicat17/com.navicat.premium.en.flatpakref || true
-    '';
-  };
-
-  # ========================================
-  # Versão do Sistema
-  # ========================================
+  nixpkgs.config.allowUnfree = true;
 
   system.stateVersion = "25.11";
 }

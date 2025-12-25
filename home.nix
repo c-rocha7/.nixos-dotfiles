@@ -14,22 +14,20 @@ let
     startupNotify = true;
     startupWMClass = "glaclient-linux";
   };
-  
+
   workAndDev = with pkgs; [
+    filezilla
     tree
   ];
 
   browsers = with pkgs.unstable; [
     microsoft-edge
-    chromium
     google-chrome
-    qutebrowser
     mullvad-browser
   ];
 
   mediaAndSocial = with pkgs.unstable; [
     spotify
-    spotify-player
     vesktop
     mpv
     obsidian
@@ -37,12 +35,7 @@ let
 
   editorsAndTools = with pkgs.unstable; [
     vscode
-    zed-editor
     onlyoffice-desktopeditors
-    yazi
-    kitty
-    gnome-boxes
-    filezilla
   ];
 
   gamingTools = with pkgs.unstable; [
@@ -50,12 +43,14 @@ let
     protonplus
   ];
 
+  desktopTools = with pkgs.unstable; [
+    kitty
+  ];
+
 in
 {
   imports = [
-    ./config/git.nix
-    # ./modules/hyprland.nix
-    inputs.stylix.homeManagerModules.stylix
+    ./modules/git.nix
   ];
 
   home = {
@@ -63,14 +58,13 @@ in
     homeDirectory = "/home/cauanixos";
     stateVersion = "25.11";
 
-    packages = workAndDev 
-      ++ browsers 
-      ++ mediaAndSocial 
-      ++ editorsAndTools 
+    packages = workAndDev
+      ++ browsers
+      ++ mediaAndSocial
+      ++ editorsAndTools
       ++ gamingTools
+      ++ desktopTools
       ++ [ grandLineAdventures ];
-
-    file.".p10k.zsh".source = ./config/p10k.zsh;
   };
 
   programs.zsh = {
@@ -78,26 +72,13 @@ in
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
     enableCompletion = true;
-    
+
     shellAliases = {
       ll = "ls -la";
       ".." = "cd ..";
       "..." = "cd ../..";
       ff = "fastfetch";
       la = "ls -a";
-      nix-switch = "git add . && sudo nixos-rebuild switch --flake .";
     };
-
-    plugins = [
-      {
-        name = "powerlevel10k";
-        src = pkgs.zsh-powerlevel10k;
-        file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
-      }
-    ];
-
-    initContent = ''
-      [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-    '';
   };
 }

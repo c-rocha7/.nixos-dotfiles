@@ -3,28 +3,20 @@
 {
   services.desktopManager.plasma6.enable = true;
 
-  # programs.hyprland = {
-  #   enable = true;
-  #   xwayland.enable = true;
-  # };
-
-  environment.systemPackages = with pkgs; [
-    # waybar
-    # swww
-    # rofi
-    # swaynotificationcenter
-    # wl-clipboard
-    # kdePackages.polkit-kde-agent-1
-    # networkmanagerapplet
-    tuigreet
-  ];
+  environment.systemPackages = with pkgs; [ tuigreet ];
 
   services.greetd = {
     enable = true;
     settings = {
       default_session = {
-        command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd startplasma-wayland --remember --asterisks";
-        # command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd Hyprland --remember --asterisks";
+        command = ''
+          ${pkgs.tuigreet}/bin/tuigreet \
+            --time \
+            --remember \
+            --remember-user-session \
+            --asterisks \
+            --cmd startplasma-wayland
+        '';
         user = "greeter";
       };
     };
@@ -44,6 +36,7 @@
     layout = "us";
     variant = "alt-intl";
   };
+
   console.keyMap = "us-acentos";
 
   fonts.packages = with pkgs; [

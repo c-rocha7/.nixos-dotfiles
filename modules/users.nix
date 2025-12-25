@@ -4,7 +4,7 @@
   users.users.cauanixos = {
     isNormalUser = true;
     description = "cauanixos";
-    extraGroups = [ "networkmanager" "wheel" "docker" "libvirtd" "video" "audio" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" ];
     shell = pkgs.zsh;
   };
 
