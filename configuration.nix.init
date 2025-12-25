@@ -1,0 +1,133 @@
+{ config, lib, pkgs, ... }:
+
+{
+  imports =
+    [
+      ./hardware-configuration.nix
+    ];
+
+  boot.loader = {
+    systemd-boot.enable = false;
+
+    efi = {
+      canTouchEfiVariables = true;
+    };
+
+    grub = {
+      enable = true;
+      device = "nodev";
+      efiSupport = true;
+      efiInstallAsRemovable = false;
+      useOSProber = false;
+      configurationLimit = 10;
+    };
+  };
+
+  boot.kernelPackages = pkgs.linuxPackages_zen;
+
+  boot.kernelParams = [
+    "amd_pstate=disable"
+    "kernel.split_lock_mitigate=0"
+  ];
+
+  boot.supportedFilesystems = [ "ntfs" ];
+
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+    extraPackages = with pkgs; [
+      libva-vdpau-driver
+      libvdpau-va-gl
+      rocmPackages.clr.icd
+    ];
+    extraPackages32 = with pkgs.pkgsi686Linux; [
+      libva-vdpau-driver
+      libvdpau-va-gl
+    ];
+  };
+
+  networking.hostName = "nixos";
+
+  networking.networkmanager.enable = true;
+
+  time.timeZone = "America/Sao_Paulo";
+
+  i18n.defaultLocale = "pt_BR.UTF-8";
+
+  i18n.extraLocaleSettings = {
+    LC_ADDRESS = "pt_BR.UTF-8";
+    LC_IDENTIFICATION = "pt_BR.UTF-8";
+    LC_MEASUREMENT = "pt_BR.UTF-8";
+    LC_MONETARY = "pt_BR.UTF-8";
+    LC_NAME = "pt_BR.UTF-8";
+    LC_NUMERIC = "pt_BR.UTF-8";
+    LC_PAPER = "pt_BR.UTF-8";
+    LC_TELEPHONE = "pt_BR.UTF-8";
+    LC_TIME = "pt_BR.UTF-8";
+  };
+
+  services.xserver = {
+    enable = true;
+    videoDrivers = [ "amdgpu" ];
+  };
+
+  services.xserver.xkb = {
+    layout = "us";
+    variant = "alt-intl";
+  };
+
+  services.displayManager.sddm.enable = true;
+  services.displayManager.sddm.wayland.enable = true;
+  services.desktopManager.plasma6.enable = true;
+
+  console.keyMap = "us-acentos";
+
+  services.printing.enable = true;
+
+  services.pulseaudio.enable = false;
+
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+    jack.enable = true;
+    wireplumber.enable = true;
+  };
+
+  security.rtkit.enable = true;
+
+  security.polkit.enable = true;
+
+  users.users.cauanixos = {
+    isNormalUser = true;
+    extraGroups = [ "wheel" "networkmanager" ];
+    packages = with pkgs; [
+      tree
+    ];
+  };
+
+  programs.firefox.enable = true;
+
+  environment.systemPackages = with pkgs; [
+    vim
+    wget
+    git
+    micro
+  ];
+
+  nixpkgs.config.allowUnfree = true;
+
+  nix.settings = {
+    auto-optimise-store = true;
+    experimental-features = [ "nix-command" "flakes" ];
+  };
+
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 7d";
+  };
+
+  system.stateVersion = "25.11";
+}
