@@ -28,7 +28,6 @@ let
 
   mediaAndSocial = with pkgs.unstable; [
     spotify
-    vesktop
     mpv
     obsidian
   ];
@@ -47,6 +46,10 @@ let
     kitty
   ];
 
+  mediaAndSocialStable = with pkgs; [
+    vesktop
+  ];
+
 in
 {
   imports = [
@@ -61,6 +64,7 @@ in
     packages = workAndDev
       ++ browsers
       ++ mediaAndSocial
+      ++ mediaAndSocialStable
       ++ editorsAndTools
       ++ gamingTools
       ++ desktopTools

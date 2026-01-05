@@ -56,6 +56,8 @@
     ];
   };
 
+  services.resolved.enable = true;
+
   programs.firefox.enable = true;
 
   programs.obs-studio = {
