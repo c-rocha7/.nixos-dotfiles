@@ -85,6 +85,8 @@
     unstable.lazygit
     unstable.lazydocker
     unstable.docker-compose
+    unstable.eza
+    unstable.bat
 
     inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];

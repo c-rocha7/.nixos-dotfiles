@@ -77,12 +77,20 @@ in
     syntaxHighlighting.enable = true;
     enableCompletion = true;
 
+    oh-my-zsh = {
+      enable = true;
+      theme = "robbyrussell";
+    };
+
     shellAliases = {
+      ls = "eza --icons";
+      bat = "bat --style=auto";
       ll = "ls -la";
       ".." = "cd ..";
       "..." = "cd ../..";
       ff = "fastfetch";
       la = "ls -a";
+      sail = "sh $([ -f sail ] && echo sail || echo vendor/bin/sail)";
     };
   };
 }
