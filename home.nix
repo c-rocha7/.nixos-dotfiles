@@ -82,6 +82,18 @@ in
       theme = "robbyrussell";
     };
 
+    history = {
+      save = 0;
+      size = 1000;
+      path = "/dev/null";
+    };
+
+    history.share = false;
+
+    initContent = ''
+      export HISTFILE=/dev/null
+    '';
+
     shellAliases = {
       ls = "eza --icons";
       bat = "bat --style=auto";
