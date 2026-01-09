@@ -53,6 +53,7 @@
       "com.github.tchx84.Flatseal"
       "com.pokemmo.PokeMMO"
       "io.github.kolunmi.Bazaar"
+      "org.kde.kalk"
     ];
   };
 
@@ -73,10 +74,6 @@
     wget
     git
     micro
-    php
-    php.packages.composer
-    nodejs_24
-    python314
     ntfs3g
     p7zip
     file
@@ -87,6 +84,8 @@
     unstable.docker-compose
     unstable.eza
     unstable.bat
+    unstable.ddev
+    unstable.asdf-vm
 
     inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];

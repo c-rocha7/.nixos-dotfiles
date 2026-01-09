@@ -35,6 +35,7 @@ let
   editorsAndTools = with pkgs.unstable; [
     vscode
     onlyoffice-desktopeditors
+    asdf-vm
   ];
 
   gamingTools = with pkgs.unstable; [
@@ -54,6 +55,7 @@ in
 {
   imports = [
     ./modules/git.nix
+    ./modules/fastfetch
   ];
 
   home = {
@@ -69,6 +71,10 @@ in
       ++ gamingTools
       ++ desktopTools
       ++ [ grandLineAdventures ];
+
+    sessionVariables = {
+      DIRENV_LOG_FORMAT = "";
+    };
   };
 
   programs.zsh = {
@@ -92,17 +98,35 @@ in
 
     initContent = ''
       export HISTFILE=/dev/null
+      . ${pkgs.asdf-vm}/share/asdf-vm/asdf.sh
     '';
 
     shellAliases = {
-      ls = "eza --icons";
-      bat = "bat --style=auto";
-      ll = "ls -la";
       ".." = "cd ..";
       "..." = "cd ../..";
-      ff = "fastfetch";
+      ls = "eza --icons";
+      ll = "ls -la";
       la = "ls -a";
+      bat = "bat --style=auto";
+      ff = "fastfetch";
       sail = "sh $([ -f sail ] && echo sail || echo vendor/bin/sail)";
+      doc = "cd ~/Documentos";
+      obsidian = "cd ~/Documentos/Obsidian\ Notes/";
+      nix-init = "f(){ nix flake init --template \"https://flakehub.com/f/the-nix-way/dev-templates/*#$1\" && echo \"use flake\" > .envrc && direnv allow; unset -f f; }; f";
     };
+  };
+
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+    enableZshIntegration = true;
+  };
+
+  programs.fzf = {
+    enable = true;
+    enableZshIntegration = true;
+    defaultOptions = [
+      "--preview 'bat --style=numbers --color=always --line-range :500 {}'"
+    ];
   };
 }
