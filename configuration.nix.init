@@ -1,11 +1,45 @@
+# =============================================================================
+# 1. IMPORTAÇÕES E PARÂMETROS DE HARDWARE (AMD RYZEN & RADEON)
+# =============================================================================
 { config, lib, pkgs, ... }:
 
 {
-  imports =
-    [
-      ./hardware-configuration.nix
-    ];
+  imports = [ 
+    ./hardware-configuration.nix 
+  ];
 
+  # Kernel otimizado para Desktop/Gaming 
+  boot.kernelPackages = pkgs.linuxPackages_zen;
+
+  # Parâmetros específicos para performance AMD e compatibilidade
+  boot.kernelParams = [
+    "amd_pstate=disable"            # Desativa o driver pstate para controle manual/clássico
+    "kernel.split_lock_mitigate=0"  # Melhora performance em alguns jogos/aplicativos
+  ];
+
+  # Suporte a sistemas de arquivos Windows (útil para seu SSD/HDs extras)
+  boot.supportedFilesystems = [ "ntfs" ];
+
+  # Configuração de Drivers de Vídeo (RX 7600 + iGPU do 4600G)
+  services.xserver.videoDrivers = [ "amdgpu" ];
+  
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true; # Essencial para Steam/Jogos antigos
+    extraPackages = with pkgs; [
+      libva-vdpau-driver
+      libvdpau-va-gl
+      rocmPackages.clr.icd # Suporte a OpenCL/Computação na GPU 
+    ];
+    extraPackages32 = with pkgs.pkgsi686Linux; [
+      libva-vdpau-driver
+      libvdpau-va-gl
+    ];
+  };
+
+  # =============================================================================
+  # 2. SISTEMA DE BOOT (GRUB)
+  # =============================================================================
   boot.loader = {
     systemd-boot.enable = false;
 
@@ -19,41 +53,19 @@
       efiSupport = true;
       efiInstallAsRemovable = false;
       useOSProber = false;
-      configurationLimit = 10;
+      configurationLimit = 10; # Limite de entradas para poupar espaço 
     };
   };
 
-  boot.kernelPackages = pkgs.linuxPackages_zen;
-
-  boot.kernelParams = [
-    "amd_pstate=disable"
-    "kernel.split_lock_mitigate=0"
-  ];
-
-  boot.supportedFilesystems = [ "ntfs" ];
-
-  hardware.graphics = {
-    enable = true;
-    enable32Bit = true;
-    extraPackages = with pkgs; [
-      libva-vdpau-driver
-      libvdpau-va-gl
-      rocmPackages.clr.icd
-    ];
-    extraPackages32 = with pkgs.pkgsi686Linux; [
-      libva-vdpau-driver
-      libvdpau-va-gl
-    ];
-  };
-
+  # =============================================================================
+  # 3. REDE E LOCALIZAÇÃO (I18N)
+  # =============================================================================
   networking.hostName = "nixos";
-
   networking.networkmanager.enable = true;
 
   time.timeZone = "America/Sao_Paulo";
 
   i18n.defaultLocale = "pt_BR.UTF-8";
-
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "pt_BR.UTF-8";
     LC_IDENTIFICATION = "pt_BR.UTF-8";
@@ -66,25 +78,36 @@
     LC_TIME = "pt_BR.UTF-8";
   };
 
-  services.xserver = {
-    enable = true;
-    videoDrivers = [ "amdgpu" ];
-  };
+  # =============================================================================
+  # 4. INTERFACE GRÁFICA E ENTRADA
+  # =============================================================================
+  services.xserver.enable = true;
 
+  # Configuração de Teclado (Internacional com acentos)
+  # services.xserver.xkb = {
+  #   layout = "us";
+  #   variant = "alt-intl";
+  # };
+  # console.keyMap = "us-acentos";
+
+  # Configuração de Teclado (Brasil ABNT2)
   services.xserver.xkb = {
-    layout = "us";
-    variant = "alt-intl";
+    layout = "br";
+    variant = "";
   };
+  console.keyMap = "br-abnt2";
 
+  # Display Manager e Desktop (Plasma 6 / Wayland)
   services.displayManager.sddm.enable = true;
   services.displayManager.sddm.wayland.enable = true;
   services.desktopManager.plasma6.enable = true;
 
-  console.keyMap = "us-acentos";
-
-  services.printing.enable = true;
-
+  # =============================================================================
+  # 5. ÁUDIO E SEGURANÇA
+  # =============================================================================
   services.pulseaudio.enable = false;
+  security.rtkit.enable = true;
+  security.polkit.enable = true;
 
   services.pipewire = {
     enable = true;
@@ -95,13 +118,14 @@
     wireplumber.enable = true;
   };
 
-  security.rtkit.enable = true;
+  services.printing.enable = true;
 
-  security.polkit.enable = true;
-
+  # =============================================================================
+  # 6. USUÁRIOS E PROGRAMAS
+  # =============================================================================
   users.users.cauanixos = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" ];
+    extraGroups = [ "wheel" "networkmanager" "video" "audio" ];
     packages = with pkgs; [
       tree
     ];
@@ -114,20 +138,25 @@
     wget
     git
     micro
+    btop # Monitor de sistema para acompanhar o Ryzen
   ];
 
+  # =============================================================================
+  # 7. CONFIGURAÇÕES DO NIX E OTIMIZAÇÃO (SSD 120GB)
+  # =============================================================================
   nixpkgs.config.allowUnfree = true;
 
   nix.settings = {
-    auto-optimise-store = true;
+    auto-optimise-store = true; # Links duplicados economizam muito espaço
     experimental-features = [ "nix-command" "flakes" ];
   };
 
   nix.gc = {
     automatic = true;
     dates = "weekly";
-    options = "--delete-older-than 7d";
+    options = "--delete-older-than 7d"; # Limpeza agressiva para SSD pequeno
   };
 
+  # Versão de estado inicial do sistema
   system.stateVersion = "25.11";
 }
