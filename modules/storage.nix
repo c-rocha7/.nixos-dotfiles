@@ -3,17 +3,17 @@
 {
   boot.supportedFilesystems = [ "ntfs" ];
 
-  fileSystems."/home/cauanixos/Jogos/ssd-512-gb" = {
-    device = "/dev/disk/by-uuid/F002C0CA02C096CE";
-    fsType = "ntfs3";
-    options = [ "defaults" "uid=1000" "gid=100" "nofail" "windows_names" ];
-  };
+  # fileSystems."/home/cauanixos/Jogos/ssd-512-gb" = {
+  #   device = "/dev/disk/by-uuid/F002C0CA02C096CE";
+  #   fsType = "ntfs3";
+  #   options = [ "defaults" "uid=1000" "gid=100" "nofail" "windows_names" ];
+  # };
 
-  fileSystems."/home/cauanixos/Jogos/hd-1-tb" = {
-    device = "/dev/disk/by-uuid/2ED6CE36D6CDFDD9";
-    fsType = "ntfs3";
-    options = [ "defaults" "uid=1000" "gid=100" "nofail" "windows_names" ];
-  };
+  # fileSystems."/home/cauanixos/Jogos/hd-1-tb" = {
+  #   device = "/dev/disk/by-uuid/2ED6CE36D6CDFDD9";
+  #   fsType = "ntfs3";
+  #   options = [ "defaults" "uid=1000" "gid=100" "nofail" "windows_names" ];
+  # };
 
   nix.settings = {
     auto-optimise-store = true;

@@ -33,11 +33,11 @@
   };
 
   services.xserver.xkb = {
-    layout = "us";
-    variant = "alt-intl";
+    layout = "br";
+    variant = "";
   };
 
-  console.keyMap = "us-acentos";
+  console.keyMap = "br-abnt2";
 
   fonts.packages = with pkgs; [
     font-awesome

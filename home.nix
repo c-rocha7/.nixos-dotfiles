@@ -1,54 +1,38 @@
 { config, pkgs, inputs, ... }:
 
 let
-  grandLineAdventures = pkgs.makeDesktopItem {
-    name = "grand-line-adventures";
-    desktopName = "Grand Line Adventures";
-    comment = "Grand Line Adventures";
-    terminal = false;
-    exec = "/home/cauanixos/\"Grand Line Adventures\"/glaclient-linux";
-    icon = "/home/cauanixos/Grand Line Adventures/assets/glaclient.png";
-    type = "Application";
-    categories = [ "Game" ];
-    keywords = [ "game" ];
-    startupNotify = true;
-    startupWMClass = "glaclient-linux";
-  };
+  # grandLineAdventures = pkgs.makeDesktopItem {
+  #   name = "grand-line-adventures";
+  #   desktopName = "Grand Line Adventures";
+  #   comment = "Grand Line Adventures";
+  #   terminal = false;
+  #   exec = "/home/cauanixos/\"Grand Line Adventures\"/glaclient-linux";
+  #   icon = "/home/cauanixos/Grand Line Adventures/assets/glaclient.png";
+  #   type = "Application";
+  #   categories = [ "Game" ];
+  #   keywords = [ "game" ];
+  #   startupNotify = true;
+  #   startupWMClass = "glaclient-linux";
+  # };
 
-  workAndDev = with pkgs; [
-    filezilla
-    tree
-  ];
-
-  browsers = with pkgs.unstable; [
-    microsoft-edge
-    google-chrome
-    mullvad-browser
-  ];
-
-  mediaAndSocial = with pkgs.unstable; [
+  stablePkgs = with pkgs; [
     spotify
     mpv
     obsidian
+    tree
+    filezilla
   ];
 
-  editorsAndTools = with pkgs.unstable; [
-    vscode
-    onlyoffice-desktopeditors
-    asdf-vm
-  ];
-
-  gamingTools = with pkgs.unstable; [
-    heroic
-    protonplus
-  ];
-
-  desktopTools = with pkgs.unstable; [
-    kitty
-  ];
-
-  mediaAndSocialStable = with pkgs; [
+  unstablePkgs = with pkgs.unstable; [
     vesktop
+    kitty
+    onlyoffice-desktopeditors
+    vscode
+    # microsoft-edge
+    # google-chrome
+    # mullvad-browser
+    # heroic
+    # protonplus
   ];
 
 in
@@ -63,18 +47,9 @@ in
     homeDirectory = "/home/cauanixos";
     stateVersion = "25.11";
 
-    packages = workAndDev
-      ++ browsers
-      ++ mediaAndSocial
-      ++ mediaAndSocialStable
-      ++ editorsAndTools
-      ++ gamingTools
-      ++ desktopTools
-      ++ [ grandLineAdventures ];
-
-    sessionVariables = {
-      DIRENV_LOG_FORMAT = "";
-    };
+    packages = stablePkgs
+      ++ unstablePkgs;
+      # ++ [ grandLineAdventures ];
   };
 
   programs.zsh = {
@@ -96,11 +71,6 @@ in
 
     history.share = false;
 
-    initContent = ''
-      export HISTFILE=/dev/null
-      . ${pkgs.asdf-vm}/share/asdf-vm/asdf.sh
-    '';
-
     shellAliases = {
       ".." = "cd ..";
       "..." = "cd ../..";
@@ -109,17 +79,10 @@ in
       la = "ls -a";
       bat = "bat --style=auto";
       ff = "fastfetch";
-      sail = "sh $([ -f sail ] && echo sail || echo vendor/bin/sail)";
-      doc = "cd ~/Documentos";
-      obsidian = "cd ~/Documentos/Obsidian\ Notes/";
-      nix-init = "f(){ nix flake init --template \"https://flakehub.com/f/the-nix-way/dev-templates/*#$1\" && echo \"use flake\" > .envrc && direnv allow; unset -f f; }; f";
+      nix-init-php = "nix flake init -t github:the-nix-way/dev-templates#php && echo 'use flake' > .envrc && direnv allow";
+      nix-init-node = "nix flake init -t github:the-nix-way/dev-templates#node && echo 'use flake' > .envrc && direnv allow";
+      da = "direnv allow";
     };
-  };
-
-  programs.direnv = {
-    enable = true;
-    nix-direnv.enable = true;
-    enableZshIntegration = true;
   };
 
   programs.fzf = {
@@ -128,5 +91,19 @@ in
     defaultOptions = [
       "--preview 'bat --style=numbers --color=always --line-range :500 {}'"
     ];
+  };
+
+  programs.obs-studio = {
+    enable = true;
+    plugins = with pkgs.obs-studio-plugins; [
+      obs-pipewire-audio-capture
+      obs-vkcapture
+    ];
+  };
+
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+    enableZshIntegration = true;
   };
 }

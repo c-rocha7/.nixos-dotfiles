@@ -42,18 +42,6 @@
           {
             nixpkgs.overlays = [ unstableOverlay ];
 
-            disabledModules = [
-              "programs/obs-studio.nix"
-              "programs/steam.nix"
-              "virtualisation/docker.nix"
-            ];
-
-            imports = [
-              "${nixpkgs-unstable}/nixos/modules/programs/obs-studio.nix"
-              "${nixpkgs-unstable}/nixos/modules/programs/steam.nix"
-              "${nixpkgs-unstable}/nixos/modules/virtualisation/docker.nix"
-            ];
-
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
