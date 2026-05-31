@@ -7,5 +7,8 @@
     [
         pkgs.unstable.vscode
         inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
+        pkgs.unstable.kdePackages.kdenlive
+        pkgs.mpv
+        pkgs.unstable.obsidian
     ];
 }
