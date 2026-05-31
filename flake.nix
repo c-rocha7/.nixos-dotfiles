@@ -3,12 +3,17 @@
 
     inputs = 
     {
-        nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
+        nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
         nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+
+        lanzaboote = {
+            url = "github:nix-community/lanzaboote/v1.0.0";
+            inputs.nixpkgs.follows = "nixpkgs";
+        };
 
         home-manager = 
         {
-            url = "github:nix-community/home-manager/release-25.11";
+            url = "github:nix-community/home-manager/release-26.05";
             inputs.nixpkgs.follows = "nixpkgs";
         };
 
@@ -21,7 +26,7 @@
         nix-flatpak.url = "github:gmodena/nix-flatpak";
     };
 
-    outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, nix-flatpak, ...}@inputs:
+    outputs = { self, nixpkgs, nixpkgs-unstable, lanzaboote, home-manager, nix-flatpak, ...}@inputs:
     let
         system = "x86_64-linux";
 
@@ -45,6 +50,7 @@
                 ./configuration.nix
                 nix-flatpak.nixosModules.nix-flatpak
                 home-manager.nixosModules.home-manager
+                lanzaboote.nixosModules.lanzaboote
 
                 {
                     nixpkgs.overlays = [ unstableOverlay ];

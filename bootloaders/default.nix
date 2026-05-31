@@ -3,6 +3,6 @@
 {
     imports = 
     [
-        ./limine.nix
+        ./secure-boot.nix
     ];
 }
