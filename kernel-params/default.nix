@@ -1,7 +1,8 @@
 { config, pkgs, ... }:
 
 {
-  imports = [
-    ./kernel-params.nix
-  ];
+    imports = 
+    [
+        ./kernel-params.nix
+    ];
 }

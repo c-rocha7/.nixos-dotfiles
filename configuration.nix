@@ -1,19 +1,20 @@
 { config, lib, pkgs, ... }:
 
 {
-  imports = [
-    ./hardware-configuration.nix
-    ./kernel-params
-    ./amd
-    ./zram
-    ./bootloaders
-    ./network
-    ./desktop
-    ./flatpak
-    ./nix-settings
-    ./user
-  ];
+    imports = 
+    [
+        ./hardware-configuration.nix
+        ./kernel-params
+        ./amd
+        ./zram
+        ./bootloaders
+        ./network
+        ./desktop
+        ./flatpak
+        ./nix-settings
+        ./user
+    ];
 
-  # Versão do sistema
-  system.stateVersion = "26.05";
+    # Versão do sistema
+    system.stateVersion = "26.05";
 }

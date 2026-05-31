@@ -1,16 +1,18 @@
 { config, pkgs, ... }:
 
 {
-  boot.supportedFilesystems = [ "ntfs" ];
+    boot.supportedFilesystems = [ "ntfs" ];
 
-  boot.loader = {
-    systemd-boot.enable = false;
-    grub.enable = false;
-    efi.canTouchEfiVariables = true;
+    boot.loader = 
+    {
+        systemd-boot.enable = false;
+        grub.enable = false;
+        efi.canTouchEfiVariables = true;
 
-    limine = {
-      enable = true;
-      maxGenerations = 10;
+        limine = 
+        {
+            enable = true;
+            maxGenerations = 10;
+        };
     };
-  };
 }

@@ -1,7 +1,8 @@
 { config, pkgs, ... }:
 
 {
-  boot.kernelParams = [
-    "amd_pstate=disable"
-  ];
+    boot.kernelParams = 
+    [
+        "amd_pstate=disable"
+    ];
 }

@@ -1,7 +1,8 @@
 { config, pkgs, ... }:
 
 {
-  imports = [
-    ./zram.nix
-  ];
+    imports = 
+    [
+        ./zram.nix
+    ];
 }
