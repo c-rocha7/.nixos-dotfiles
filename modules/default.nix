@@ -7,5 +7,6 @@
         ./dev-tools.nix
         ./git.nix
         ./obs-studio.nix
+        ./fzf.nix
     ];
 }
