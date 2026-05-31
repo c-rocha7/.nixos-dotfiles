@@ -13,6 +13,8 @@
         ];
 
         packages = with pkgs; [];
+
+        shell = pkgs.zsh;
     };
 
     environment.systemPackages = with pkgs;
@@ -21,4 +23,6 @@
         wget
         micro
     ];
+
+    programs.zsh.enable = true;    
 }

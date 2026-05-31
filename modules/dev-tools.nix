@@ -10,5 +10,6 @@
         pkgs.unstable.kdePackages.kdenlive
         pkgs.mpv
         pkgs.unstable.obsidian
+        pkgs.unstable.kitty
     ];
 }

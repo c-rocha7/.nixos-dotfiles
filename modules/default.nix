@@ -8,5 +8,6 @@
         ./git.nix
         ./obs-studio.nix
         ./fzf.nix
+        ./zsh.nix
     ];
 }
