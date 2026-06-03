@@ -4,7 +4,7 @@
     services.flatpak = 
     {
         enable = true;
-        
+
         update.auto = 
         {
             enable = true;
@@ -19,6 +19,6 @@
             }
         ];
 
-        packages = [];
+        packages = [ ];
     };
 }

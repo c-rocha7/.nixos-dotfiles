@@ -5,12 +5,14 @@
     home.homeDirectory = "/home/cauanixos";
     home.stateVersion = "26.05";
 
-    imports = [
+    imports = 
+    [
         ./modules
         ./programs/fastfetch
     ];
 
-    nix.gc = {
+    nix.gc = 
+    {
         automatic = true;
         dates = "weekly";
         options = "--delete-older-than 7d";

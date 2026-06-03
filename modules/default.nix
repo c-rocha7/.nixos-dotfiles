@@ -3,11 +3,11 @@
 {
     imports = 
     [
-        ./terminal.nix
         ./dev-tools.nix
+        ./fzf.nix
         ./git.nix
         ./obs-studio.nix
-        ./fzf.nix
+        ./terminal.nix
         ./zsh.nix
     ];
 }

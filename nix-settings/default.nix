@@ -3,8 +3,8 @@
 {
     imports = 
     [
-        ./nix-settings.nix
         ./kvm.nix
+        ./nix-settings.nix
         ./podman.nix
     ];
 }

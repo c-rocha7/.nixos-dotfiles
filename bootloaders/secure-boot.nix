@@ -1,4 +1,3 @@
-# ~/nixos/bootloaders/secure-boot.nix
 { config, pkgs, lib, ... }:
 
 {

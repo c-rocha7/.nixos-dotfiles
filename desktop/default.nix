@@ -4,11 +4,11 @@
     imports = 
     [
         ./audio-pipewire.nix
-        ./printing.nix
-        ./upower.nix
-        ./teclado-br.nix
         ./dm-sddm.nix
-        ./wm-plasma6.nix
         ./fonts.nix
+        ./printing.nix
+        ./teclado-br.nix
+        ./upower.nix
+        ./wm-plasma6.nix
     ];
 }

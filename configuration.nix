@@ -3,18 +3,17 @@
 {
     imports = 
     [
-        ./hardware-configuration.nix
-        ./kernel-params
         ./amd
-        ./zram
         ./bootloaders
-        ./network
         ./desktop
         ./flatpak
+        ./hardware-configuration.nix
+        ./kernel-params
+        ./network
         ./nix-settings
         ./user
+        ./zram
     ];
 
-    # Versão do sistema
     system.stateVersion = "26.05";
 }
