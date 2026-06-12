@@ -7,5 +7,6 @@
     pkgs.unstable.btop
     pkgs.unstable.bat
     pkgs.unstable.eza
+    pkgs.unstable.cava
   ];
 }

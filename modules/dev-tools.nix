@@ -16,5 +16,6 @@
     pkgs.unstable.obsidian
     pkgs.unstable.kitty
     pkgs.unstable.nixfmt
+    pkgs.unstable.rofi
   ];
 }
