@@ -1,22 +1,18 @@
 { config, pkgs, ... }:
 
 {
-    services.xserver.videoDrivers = [ "amdgpu" ];
+  services.xserver.videoDrivers = [ "amdgpu" ];
 
-    hardware.graphics = 
-    {
-        enable = true;
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
 
-        enable32Bit = true;
+    extraPackages = with pkgs; [
+      rocmPackages.clr.icd
+    ];
+  };
 
-        extraPackages = with pkgs; 
-        [
-            rocmPackages.clr.icd
-        ];
-    };
-
-    environment.sessionVariables = 
-    {
-        MESA_SHADER_CACHE_MAX_SIZE = "12G";
-    };
+  environment.sessionVariables = {
+    MESA_SHADER_CACHE_MAX_SIZE = "12G";
+  };
 }

@@ -1,8 +1,7 @@
 { config, pkgs, ... }:
 
 {
-    imports = 
-    [
-        ./cauanixos.nix
-    ];
+  imports = [
+    ./cauanixos.nix
+  ];
 }

@@ -1,7 +1,13 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
-    services.xserver.enable = true;
-    services.desktopManager.gnome.enable = true;
-    environment.gnome.excludePackages = with pkgs; [ ];
+  services.xserver.enable = true;
+  services.desktopManager.gnome.enable = true;
+
+  environment.gnome.excludePackages = with pkgs; [ ];
 }

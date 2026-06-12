@@ -1,19 +1,15 @@
 { config, pkgs, ... }:
 
 {
-    programs.fzf = 
-    {
-        enable = true;
+  programs.fzf = {
+    enable = true;
+    enableZshIntegration = true;
+    enableBashIntegration = true;
 
-        enableZshIntegration = true;
+    package = pkgs.unstable.fzf;
 
-        enableBashIntegration = true;
-
-        package = pkgs.unstable.fzf;
-
-        defaultOptions = 
-        [
-            "--preview 'bat --style=numbers --color=always --line-range :500 {}'"
-        ];
-    };
+    defaultOptions = [
+      "--preview 'bat --style=numbers --color=always --line-range :500 {}'"
+    ];
+  };
 }

@@ -1,33 +1,30 @@
 { config, pkgs, ... }:
 
 {
-    programs.mise = 
-    {
-        enable = true;
-        enableZshIntegration = true;
-        package = pkgs.unstable.mise;
+  programs.mise = {
+    enable = true;
+    enableZshIntegration = true;
 
-        globalConfig = 
-        {
-            settings = 
-            {
-                all_compile = false;     
-                experimental = true;
-            };
+    package = pkgs.unstable.mise;
 
-            tools = 
-            {
-                bun         = "latest";
-                go          = "latest";
-                java        = "latest";
-                lazydocker  = "latest";
-                lazygit     = "latest";
-                node        = "latest";
-                pnpm        = "latest";
-                python      = "latest";
-                ruby        = "latest";
-                rust        = "latest";
-            };
-        };
+    globalConfig = {
+      settings = {
+        all_compile = false;
+        experimental = true;
+      };
+
+      tools = {
+        bun = "latest";
+        go = "latest";
+        java = "latest";
+        lazydocker = "latest";
+        lazygit = "latest";
+        node = "latest";
+        pnpm = "latest";
+        python = "latest";
+        ruby = "latest";
+        rust = "latest";
+      };
     };
+  };
 }

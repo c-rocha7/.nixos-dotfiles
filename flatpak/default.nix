@@ -1,8 +1,7 @@
 { config, pkgs, ... }:
 
 {
-    imports = 
-    [
-        ./flatpak.nix
-    ];
+  imports = [
+    ./flatpak.nix
+  ];
 }

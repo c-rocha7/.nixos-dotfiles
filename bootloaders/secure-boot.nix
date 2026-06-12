@@ -1,15 +1,19 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
-    environment.systemPackages = 
-    [
-        pkgs.sbctl
-    ];
+  environment.systemPackages = [
+    pkgs.sbctl
+  ];
 
-    boot.loader.systemd-boot.enable = lib.mkForce false;
+  boot.loader.systemd-boot.enable = lib.mkForce false;
 
-    boot.lanzaboote = {
-        enable = true;
-        pkiBundle = "/var/lib/sbctl";
-    };
+  boot.lanzaboote = {
+    enable = true;
+    pkiBundle = "/var/lib/sbctl";
+  };
 }
