@@ -20,6 +20,8 @@
   boot.supportedFilesystems = [ "ntfs" ];
 
   services.xserver.videoDrivers = [ "amdgpu" ];
+
+  boot.initrd.kernelModules = [ "amdgpu" ];
   
   hardware.graphics = {
     enable = true;
@@ -176,6 +178,7 @@
   ];
 
   environment.sessionVariables = {
+    HSA_OVERRIDE_GFX_VERSION = "11.0.0";
     MESA_SHADER_CACHE_MAX_SIZE = "12G";
   };
 
