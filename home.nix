@@ -22,6 +22,13 @@
       unstable.eza
       unstable.cava
       unstable.vscode
+
+      kitty
+      rofi
+      waybar
+      mako
+      hyprpaper
+      wl-clipboard
     ];
   };
 
@@ -92,6 +99,24 @@
       ff = "fastfetch";
     };
   };
+
+  # wayland.windowManager.hyprland = {
+  # 	enable = true;
+  # 	systemd.enable = true;
+  #   settings = {
+  #     on = {
+  #       _args = [
+  #         "hyprland.start"
+  #         (lua ''
+  #           function()
+  #             hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
+  #             hl.exec_cmd("systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
+  #           end
+  #         '')
+  #       ];
+  #     };
+  #   };
+  # };
 
   nix.gc = {
     automatic = true;

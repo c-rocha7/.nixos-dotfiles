@@ -95,7 +95,9 @@
     };
   };
 
-  services.desktopManager.plasma6.enable = true;
+  # services.desktopManager.plasma6.enable = true;
+
+  programs.hyprland.enable = true;
 
   services.pulseaudio.enable = false;
 
@@ -158,11 +160,14 @@
     nerd-fonts.fantasque-sans-mono
     nerd-fonts.fira-code
     nerd-fonts.fira-mono
+    nerd-fonts.liberation
     nerd-fonts.jetbrains-mono
     nerd-fonts.space-mono
     noto-fonts
     noto-fonts-cjk-sans
+    noto-fonts-cjk-serif
     noto-fonts-color-emoji
+    noto-fonts-monochrome-emoji
   ];
 
   zramSwap = {
@@ -180,6 +185,7 @@
   environment.sessionVariables = {
     HSA_OVERRIDE_GFX_VERSION = "11.0.0";
     MESA_SHADER_CACHE_MAX_SIZE = "12G";
+    NIXOS_OZONE_WL = "1";
   };
 
   nixpkgs.config.allowUnfree = true;
