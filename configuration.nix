@@ -135,9 +135,6 @@
   users.users.cauanixos = {
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" "libvirtd" ];
-    packages = with pkgs; [
-      tree
-    ];
     shell = pkgs.zsh;
   };
 
@@ -176,7 +173,6 @@
     wget
     git
     micro
-    btop
   ];
 
   environment.sessionVariables = {
