@@ -42,8 +42,8 @@
 
         modules = [
           ./configuration.nix
-          nix-flatpak.nixosModules.nix-flatpak
           home-manager.nixosModules.home-manager
+          nix-flatpak.nixosModules.nix-flatpak
 
           {
             nixpkgs.overlays = [ unstableOverlay ];

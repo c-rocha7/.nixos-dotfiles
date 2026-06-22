@@ -95,9 +95,14 @@
     };
   };
 
-  # services.desktopManager.plasma6.enable = true;
+  documentation.man.enable = true;
 
-  programs.hyprland.enable = true;
+  documentation.dev.enable = true;
+
+  programs.hyprland = {
+    enable = true;
+    package = pkgs.unstable.hyprland;
+  };
 
   services.pulseaudio.enable = false;
 
@@ -135,6 +140,14 @@
 
     packages = [ ];
   };
+
+  xdg.portal.enable = true;
+
+  xdg.portal.config.common.default = "*";
+
+  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+
+  environment.pathsToLink = [ "/share/applications" "/share/xdg-desktop-portal" ];
 
   users.users.cauanixos = {
     isNormalUser = true;

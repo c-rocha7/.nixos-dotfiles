@@ -13,24 +13,48 @@
 
     packages = with pkgs; [
       tree
-      fastfetch
 
       inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
 
-      unstable.btop
-      unstable.bat
-      unstable.eza
-      unstable.cava
-      unstable.vscode
-
-      kitty
-      rofi
-      waybar
-      mako
-      hyprpaper
       wl-clipboard
+      waypaper
+      pavucontrol
+      nwg-look
+      libsForQt5.qt5ct
+      kdePackages.qt6ct
+      kdePackages.breeze
+      kdePackages.breeze-gtk
+      papirus-icon-theme
+      libsForQt5.qtstyleplugin-kvantum
+      qt6Packages.qtstyleplugin-kvantum
+      kdePackages.qtstyleplugin-kvantum
+      catppuccin-kvantum
+      magnetic-catppuccin-gtk
     ];
   };
+
+  services.swaync.enable = true;
+  services.hyprpaper.enable = true;
+  services.hypridle.enable = true;
+  programs.hyprlock.enable = true;
+  programs.hyprshot.enable = true;
+  programs.wlogout.enable = true;
+  services.awww.enable = true;
+
+  programs.vscode = {
+    enable = true;
+    package = pkgs.unstable.vscode;
+  };
+
+  programs.fastfetch.enable = true;
+  programs.yazi.enable = true;
+  programs.bat.enable = true;
+  programs.btop.enable = true;
+  programs.eza.enable = true;
+  programs.cava.enable = true;
+  programs.kitty.enable = true;
+  programs.rofi.enable = true;
+  programs.waybar.enable = true;
 
   programs.fzf = {
     enable = true;
@@ -100,23 +124,19 @@
     };
   };
 
-  # wayland.windowManager.hyprland = {
-  # 	enable = true;
-  # 	systemd.enable = true;
-  #   settings = {
-  #     on = {
-  #       _args = [
-  #         "hyprland.start"
-  #         (lua ''
-  #           function()
-  #             hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
-  #             hl.exec_cmd("systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
-  #           end
-  #         '')
-  #       ];
-  #     };
-  #   };
-  # };
+  wayland.windowManager.hyprland = {
+  	enable = true;
+    package = pkgs.unstable.hyprland;
+    xwayland.enable = true;
+    systemd.enable = false;
+    importantPrefixes = [ ];
+  };
+
+  home.file.hyprland = {
+    recursive = false;
+    source = ./hypr/hyprland.lua;
+    target = "./.config/hypr/hyprland.lua";
+  };
 
   nix.gc = {
     automatic = true;
