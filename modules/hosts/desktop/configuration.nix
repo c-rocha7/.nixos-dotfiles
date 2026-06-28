@@ -113,15 +113,7 @@
         isNormalUser = true;
         description = "Cauã R. Pereira";
         extraGroups = [ "networkmanager" "wheel" ];
-        packages = with pkgs; [
-          tree
-          inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
-          onlyoffice-desktopeditors
-          vscode
-          nil
-          nixd
-          nixpkgs-fmt
-        ];
+        packages = with pkgs; [ ];
       };
 
       documentation = {
@@ -140,14 +132,6 @@
       };
 
       programs.firefox.enable = true;
-      programs.git = {
-        enable = true;
-        config = {
-          init.defaultBranch = "main";
-          user.name = "Cauã R. Pereira";
-          user.email = "7aauac@gmail.com";
-        };
-      };
 
       nixpkgs.config.allowUnfree = true;
       programs.nix-ld.enable = true;
