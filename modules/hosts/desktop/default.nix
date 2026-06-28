@@ -7,6 +7,7 @@
       inputs.nix-flatpak.nixosModules.nix-flatpak
       self.nixosModules.desktopConfiguration
       self.nixosModules.sharedHome
+      self.nixosModules.homeGit
     ];
   };
 }
