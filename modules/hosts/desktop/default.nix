@@ -8,6 +8,8 @@
       self.nixosModules.desktopConfiguration
       self.nixosModules.sharedHome
       self.nixosModules.homeGit
+      self.nixosModules.homeTerminal
+      self.nixosModules.homeBrowser
     ];
   };
 }

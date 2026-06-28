@@ -14,8 +14,6 @@
           home.stateVersion = "26.05";
 
           home.packages = with pkgs; [
-            tree
-            inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
             onlyoffice-desktopeditors
             vscode
             nil

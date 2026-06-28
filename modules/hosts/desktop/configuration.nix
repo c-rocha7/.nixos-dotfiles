@@ -113,8 +113,11 @@
         isNormalUser = true;
         description = "Cauã R. Pereira";
         extraGroups = [ "networkmanager" "wheel" ];
+        shell = pkgs.zsh;
         packages = with pkgs; [ ];
       };
+
+      programs.zsh.enable = true;
 
       documentation = {
         dev.enable = true;
@@ -130,8 +133,6 @@
         memoryMax = 8192 * 1024 * 1024;
         priority = 100;
       };
-
-      programs.firefox.enable = true;
 
       nixpkgs.config.allowUnfree = true;
       programs.nix-ld.enable = true;
