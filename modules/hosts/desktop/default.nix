@@ -6,6 +6,7 @@
       inputs.home-manager.nixosModules.home-manager
       inputs.nix-flatpak.nixosModules.nix-flatpak
       self.nixosModules.desktopConfiguration
+      self.nixosModules.desktopStorage
       self.nixosModules.sharedHome
       self.nixosModules.homeGit
       self.nixosModules.homeTerminal

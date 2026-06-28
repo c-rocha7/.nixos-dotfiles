@@ -17,7 +17,6 @@
       ];
 
       boot.initrd.kernelModules = [ "amdgpu" ];
-      boot.supportedFilesystems = [ "ntfs" ];
 
       networking.hostName = "nixos";
 
@@ -125,13 +124,6 @@
         man.enable = true;
         info.enable = true;
         nixos.enable = true;
-      };
-
-      zramSwap = {
-        algorithm = "zstd";
-        enable = true;
-        memoryMax = 8192 * 1024 * 1024;
-        priority = 100;
       };
 
       nixpkgs.config.allowUnfree = true;
