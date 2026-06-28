@@ -1,7 +1,7 @@
-{ self, inputs, ... }:
+{ ... }:
 
 {
-  flake.nixosModules.desktopStorage = { config, pkgs, lib, ... }:
+  flake.nixosModules.desktopStorage = { ... }:
     {
       boot.supportedFilesystems = [ "ntfs" ];
 

@@ -1,7 +1,7 @@
-{ self, inputs, ... }:
+{ self, ... }:
 
 {
-  flake.nixosModules.desktopConfiguration = { config, pkgs, lib, ... }:
+  flake.nixosModules.desktopConfiguration = { pkgs, lib, ... }:
     {
       imports = [
         self.nixosModules.desktopHardware
@@ -113,7 +113,7 @@
         description = "Cauã R. Pereira";
         extraGroups = [ "networkmanager" "wheel" ];
         shell = pkgs.zsh;
-        packages = with pkgs; [ ];
+        packages = [ ];
       };
 
       programs.zsh.enable = true;
@@ -140,7 +140,7 @@
         options = "--delete-older-than 7d";
       };
 
-      environment.systemPackages = with pkgs; [ ];
+      environment.systemPackages = [ ];
 
       environment.sessionVariables = {
         MESA_SHADER_CACHE_MAX_SIZE = "12G";

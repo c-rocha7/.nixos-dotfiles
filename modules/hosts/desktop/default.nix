@@ -5,12 +5,22 @@
     modules = [
       inputs.home-manager.nixosModules.home-manager
       inputs.nix-flatpak.nixosModules.nix-flatpak
+
       self.nixosModules.desktopConfiguration
       self.nixosModules.desktopStorage
-      self.nixosModules.sharedHome
-      self.nixosModules.homeGit
-      self.nixosModules.homeTerminal
+
+      self.nixosModules.homeShared
+      self.nixosModules.homeBat
       self.nixosModules.homeBrowser
+      self.nixosModules.homeBtop
+      self.nixosModules.homeCava
+      self.nixosModules.homeEza
+      self.nixosModules.homeFastfetch
+      self.nixosModules.homeFzf
+      self.nixosModules.homeGit
+      self.nixosModules.homeKitty
+      self.nixosModules.homeObsidian
+      self.nixosModules.homeZsh
     ];
   };
 }

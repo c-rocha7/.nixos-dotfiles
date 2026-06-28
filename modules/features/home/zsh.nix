@@ -1,73 +1,13 @@
-{ self, inputs, ... }:
+{ ... }:
 
 {
-  flake.nixosModules.homeTerminal = { config, lib, pkgs, ... }:
+  flake.nixosModules.homeZsh = { pkgs, ... }:
     {
       home-manager.users.cauanixos = {
         home.packages = with pkgs; [
           tree
           zsh-powerlevel10k
         ];
-
-        programs.bat.enable = true;
-        programs.btop.enable = true;
-        programs.cava.enable = true;
-        programs.eza.enable = true;
-        programs.fastfetch.enable = true;
-
-        programs.kitty = {
-          enable = true;
-          font = {
-            name = "FiraCode Nerd Font";
-            size = 12.0;
-          };
-          settings = {
-            bold_font = "auto";
-            italic_font = "auto";
-            bold_italic_font = "auto";
-
-            shell = "${pkgs.zsh}/bin/zsh";
-
-            allow_remote_control = "yes";
-
-            foreground = "#cdd6f4";
-            background = "#1e1e2e";
-            selection_foreground = "#1e1e2e";
-            selection_background = "#f5e0dc";
-            cursor = "#f5e0dc";
-            cursor_text_color = "#1e1e2e";
-
-            color0 = "#45475a";
-            color1 = "#f38ba8";
-            color2 = "#a6e3a1";
-            color3 = "#f9e2af";
-            color4 = "#89b4fa";
-            color5 = "#f5c2e7";
-            color6 = "#94e2d5";
-            color7 = "#bac2de";
-
-            color8 = "#585b70";
-            color9 = "#f38ba8";
-            color10 = "#a6e3a1";
-            color11 = "#f9e2af";
-            color12 = "#89b4fa";
-            color13 = "#f5c2e7";
-            color14 = "#94e2d5";
-            color15 = "#a6adc8";
-
-            window_padding_width = 5;
-          };
-        };
-
-        programs.fzf = {
-          enable = true;
-          enableZshIntegration = true;
-          enableBashIntegration = true;
-
-          defaultOptions = [
-            "--preview 'bat --style=numbers --color=always --line-range :500 {}'"
-          ];
-        };
 
         programs.zsh = {
           enable = true;

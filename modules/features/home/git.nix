@@ -1,7 +1,7 @@
-{ self, inputs, ... }:
+{ ... }:
 
 {
-  flake.nixosModules.homeGit = { config, lib, pkgs, ... }:
+  flake.nixosModules.homeGit = { ... }:
     {
       home-manager.users.cauanixos = {
         programs.git = {
