@@ -7,6 +7,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    hyprland.url = "github:hyprwm/Hyprland";
+
     import-tree.url = "github:vic/import-tree";
 
     nix-flatpak.url = "github:gmodena/nix-flatpak";

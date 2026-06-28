@@ -35,9 +35,10 @@
 
       environment.sessionVariables = {
         MESA_SHADER_CACHE_MAX_SIZE = "12G";
+        # NIXOS_OZONE_WL = "1";
       };
       environment.systemPackages = with pkgs; [ ];
-      environment.variables.RUSTICL_ENABLE = "radeonsi";
+      # environment.variables.RUSTICL_ENABLE = "radeonsi";
 
       fonts.fontconfig.enable = true;
       fonts.packages = with pkgs; [
@@ -102,8 +103,14 @@
       nixpkgs.config.allowUnfree = true;
 
       programs.firefox.enable = true;
+      # programs.hyprland = {
+      #   enable = true;
+      #   package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+      #   portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+      # };
       programs.nix-ld.enable = true;
 
+      security.rtkit.enable = true;
       # services.auto-cpufreq = {
       #   enable = true;
       #   settings = {
@@ -117,10 +124,10 @@
       #     };
       #   };
       # };
-      services.desktopManager.gnome.enable = true;
-      # services.desktopManager.plasma6.enable = true;
-      services.displayManager.gdm.enable = true;
-      # services.displayManager.ly.enable = true;
+      # services.desktopManager.gnome.enable = true;
+      services.desktopManager.plasma6.enable = true;
+      # services.displayManager.gdm.enable = true;
+      services.displayManager.ly.enable = true;
       # services.displayManager.sddm.enable = true;
       # services.displayManager.sddm.wayland.enable = true;
       services.earlyoom.enable = true;
@@ -139,8 +146,8 @@
         update.auto.enable = true;
         update.auto.onCalendar = "weekly";
       };
+      # services.gnome.gnome-keyring.enable = true;
       services.resolved.enable = true;
-      security.rtkit.enable = true;
       services.pipewire = {
         alsa.enable = true;
         alsa.support32Bit = true;
@@ -167,17 +174,55 @@
         extraGroups = [ "networkmanager" "wheel" ];
         isNormalUser = true;
         packages = with pkgs; [
-          davinci-resolve
+          # arj
+          # awww
+          bat
+          cava
+          # davinci-resolve
+          eza
           fastfetch
           git
           inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
+          # kdePackages.ark
+          # kdePackages.breeze
+          # kdePackages.breeze-gtk
+          # kdePackages.dolphin
+          # kdePackages.dolphin-plugins
+          # kdePackages.kde-cli-tools
+          # kdePackages.kio-admin
+          # kdePackages.qtwayland
+          # kdePackages.qqc2-breeze-style
+          # kitty
+          lazygit
+          # libsForQt5.qt5ct
+          # libsForQt5.qtwayland
+          # networkmanagerapplet
+          # nwg-look
           onlyoffice-desktopeditors
-          pavucontrol
+          # p7zip
+          # papirus-icon-theme
+          # pavucontrol
+          # rofi
+          # unrar
+          # unzip
           tree
           vesktop
+          vim
           vscode
+          # qt6Packages.qt6ct
+          # waypaper
+          # wlogout
+          # xdg-user-dirs
+          # zip
         ];
       };
+
+      # xdg.portal = {
+      #   enable = true;
+      #   extraPortals = with pkgs; [
+      #     xdg-desktop-portal-gtk
+      #   ];
+      # };
 
       zramSwap = {
         algorithm = "zstd";
