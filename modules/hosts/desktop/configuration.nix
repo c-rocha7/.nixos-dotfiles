@@ -118,6 +118,9 @@
         inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
         onlyoffice-desktopeditors
         vscode
+        nil
+        nixd
+        nixpkgs-fmt
       ];
     };
 
