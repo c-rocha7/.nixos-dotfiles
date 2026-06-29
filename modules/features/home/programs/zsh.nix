@@ -31,6 +31,15 @@
 
             # Carrega as configurações visuais do p10k (geradas pelo p10k configure)
             [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+            # Atalhos de teclado (Keybindings)
+            bindkey "^[[H" beginning-of-line
+            bindkey "^[[F" end-of-line
+            bindkey "^[[3~" delete-char
+            bindkey "^H" backward-kill-word
+            bindkey "^[[3;5~" kill-word
+            bindkey "^[[1;5D" backward-word
+            bindkey "^[[1;5C" forward-word
           '';
 
           oh-my-zsh = {

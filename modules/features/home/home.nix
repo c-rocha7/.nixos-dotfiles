@@ -15,7 +15,6 @@
 
           home.packages = with pkgs; [
             onlyoffice-desktopeditors
-            vscode
             nil
             nixd
             nixpkgs-fmt

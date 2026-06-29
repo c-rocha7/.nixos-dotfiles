@@ -14,6 +14,7 @@
       self.nixosModules.homeBrowser
       self.nixosModules.homeBtop
       self.nixosModules.homeCava
+      self.nixosModules.homeCode
       self.nixosModules.homeEza
       self.nixosModules.homeFastfetch
       self.nixosModules.homeFzf
