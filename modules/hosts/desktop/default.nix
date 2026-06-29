@@ -26,10 +26,23 @@
       self.nixosModules.desktopConfiguration
       self.nixosModules.desktopStorage
 
-      self.nixosModules.homeCommon
-      self.nixosModules.homeDev
-      self.nixosModules.homeDesktopApps
-      self.nixosModules.homeGaming
+      self.nixosModules.homeShared
+      self.nixosModules.homeBat
+      self.nixosModules.homeBrowser
+      self.nixosModules.homeBtop
+      self.nixosModules.homeCava
+      self.nixosModules.homeCode
+      self.nixosModules.homeEza
+      self.nixosModules.homeFastfetch
+      self.nixosModules.homeFzf
+      self.nixosModules.homeGit
+      self.nixosModules.homeHeroic
+      self.nixosModules.homeKitty
+      self.nixosModules.homeObsidian
+      self.nixosModules.homeSpotifyPlayer
+      self.nixosModules.homeVesktop
+      self.nixosModules.homeVim
+      self.nixosModules.homeZsh
     ];
   };
 }
