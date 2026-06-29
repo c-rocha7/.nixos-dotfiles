@@ -2,15 +2,18 @@
 
 {
   flake.nixosModules.homeShared = { ... }:
+    let
+      username = "cauanixos";
+    in
     {
       home-manager = {
         useGlobalPkgs = true;
         useUserPackages = true;
         extraSpecialArgs = { inherit inputs; };
 
-        users.cauanixos = { pkgs, ... }: {
-          home.username = "cauanixos";
-          home.homeDirectory = "/home/cauanixos";
+        users.${username} = { pkgs, ... }: {
+          home.username = username;
+          home.homeDirectory = "/home/${username}";
           home.stateVersion = "26.05";
 
           home.packages = with pkgs; [

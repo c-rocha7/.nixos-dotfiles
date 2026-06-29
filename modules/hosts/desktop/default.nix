@@ -20,6 +20,7 @@
       self.nixosModules.nixosBase
       self.nixosModules.nixosDesktop
       self.nixosModules.nixosSteam
+      self.nixosModules.nixosUserCauanixos
 
       self.nixosModules.desktopIdentity
       self.nixosModules.desktopConfiguration

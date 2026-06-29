@@ -1,7 +1,7 @@
 { self, ... }:
 
 {
-  flake.nixosModules.desktopConfiguration = { pkgs, lib, ... }:
+  flake.nixosModules.desktopConfiguration = { lib, ... }:
     {
       imports = [
         self.nixosModules.desktopHardware
@@ -50,14 +50,6 @@
         ];
         update.auto.enable = true;
         update.auto.onCalendar = "weekly";
-      };
-
-      users.users."cauanixos" = {
-        isNormalUser = true;
-        description = "Cauã R. Pereira";
-        extraGroups = [ "networkmanager" "wheel" ];
-        shell = pkgs.zsh;
-        packages = [ ];
       };
 
       environment.sessionVariables = {
