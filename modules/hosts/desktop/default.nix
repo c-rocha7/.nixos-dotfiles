@@ -6,6 +6,17 @@
       inputs.home-manager.nixosModules.home-manager
       inputs.nix-flatpak.nixosModules.nix-flatpak
 
+      ({ ... }: {
+        nixpkgs.overlays = [
+          (final: prev: {
+            unstable = import inputs.nixpkgs-unstable {
+              system = prev.stdenv.hostPlatform.system;
+              config.allowUnfree = true;
+            };
+          })
+        ];
+      })
+
       self.nixosModules.desktopConfiguration
       self.nixosModules.desktopStorage
 
@@ -21,6 +32,9 @@
       self.nixosModules.homeGit
       self.nixosModules.homeKitty
       self.nixosModules.homeObsidian
+      self.nixosModules.homeSpotifyPlayer
+      self.nixosModules.homeVesktop
+      self.nixosModules.homeVim
       self.nixosModules.homeZsh
     ];
   };
