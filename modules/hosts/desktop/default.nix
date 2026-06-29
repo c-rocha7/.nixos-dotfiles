@@ -18,6 +18,7 @@
       })
 
       self.nixosModules.nixosBase
+      self.nixosModules.nixosDesktop
       self.nixosModules.nixosSteam
 
       self.nixosModules.desktopConfiguration
