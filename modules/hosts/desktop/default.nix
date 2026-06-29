@@ -17,6 +17,8 @@
         ];
       })
 
+      self.nixosModules.nixosSteam
+
       self.nixosModules.desktopConfiguration
       self.nixosModules.desktopStorage
 
@@ -30,6 +32,7 @@
       self.nixosModules.homeFastfetch
       self.nixosModules.homeFzf
       self.nixosModules.homeGit
+      self.nixosModules.homeHeroic
       self.nixosModules.homeKitty
       self.nixosModules.homeObsidian
       self.nixosModules.homeSpotifyPlayer

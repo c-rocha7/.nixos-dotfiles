@@ -79,6 +79,21 @@
       services.resolved.enable = true;
       services.upower.enable = true;
 
+      services.power-profiles-daemon.enable = false;
+      services.auto-cpufreq = {
+        enable = true;
+        settings = {
+          battery = {
+            governor = "powersave";
+            turbo = "never";
+          };
+          charger = {
+            gorvernor = "performance";
+            turbo = "auto";
+          };
+        };
+      };
+
       services.flatpak = {
         enable = true;
         packages = [
@@ -127,6 +142,7 @@
       };
 
       nixpkgs.config.allowUnfree = true;
+
       programs.nix-ld.enable = true;
 
       nix.settings = {
