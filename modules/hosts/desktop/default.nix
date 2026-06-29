@@ -6,17 +6,7 @@
       inputs.home-manager.nixosModules.home-manager
       inputs.nix-flatpak.nixosModules.nix-flatpak
 
-      ({ ... }: {
-        nixpkgs.overlays = [
-          (final: prev: {
-            unstable = import inputs.nixpkgs-unstable {
-              system = prev.stdenv.hostPlatform.system;
-              config.allowUnfree = true;
-            };
-          })
-        ];
-      })
-
+      self.nixosModules.nixosOverlays
       self.nixosModules.nixosBase
       self.nixosModules.nixosDesktop
       self.nixosModules.nixosSteam
