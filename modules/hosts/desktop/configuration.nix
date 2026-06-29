@@ -18,8 +18,6 @@
 
       boot.initrd.kernelModules = [ "amdgpu" ];
 
-      networking.hostName = "nixos";
-
       hardware.cpu.amd.updateMicrocode = true;
       services.power-profiles-daemon.enable = false;
       services.auto-cpufreq = {
