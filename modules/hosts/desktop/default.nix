@@ -18,6 +18,7 @@
       })
 
       self.nixosModules.nixosSteam
+      self.nixosModules.nixLd
 
       self.nixosModules.desktopConfiguration
       self.nixosModules.desktopStorage
