@@ -25,20 +25,19 @@
       self.nixosModules.homeShared
       self.nixosModules.homeBat
       self.nixosModules.homeBrowser
-      self.nixosModules.homeBtop
-      self.nixosModules.homeCava
       self.nixosModules.homeCode
       self.nixosModules.homeEza
-      self.nixosModules.homeFastfetch
       self.nixosModules.homeFzf
-      self.nixosModules.homeGit
       self.nixosModules.homeHeroic
-      self.nixosModules.homeKitty
       self.nixosModules.homeObsidian
       self.nixosModules.homeSpotifyPlayer
       self.nixosModules.homeVesktop
-      self.nixosModules.homeVim
       self.nixosModules.homeZsh
+
+      self.nixosModules.btop
+      self.nixosModules.cava
+      self.nixosModules.fastfetch
+      self.nixosModules.kitty
     ];
   };
 }

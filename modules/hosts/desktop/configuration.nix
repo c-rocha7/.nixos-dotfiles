@@ -5,6 +5,8 @@
     {
       imports = [
         self.nixosModules.desktopHardware
+        self.nixosModules.git
+        self.nixosModules.vim
       ];
 
       boot.loader.systemd-boot.enable = false;
