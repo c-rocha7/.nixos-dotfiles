@@ -1,7 +1,7 @@
 { ... }:
 
 {
-  flake.nixosModules.homeZsh = { pkgs, ... }:
+  flake.nixosModules.zsh = { pkgs, ... }:
     {
       home-manager.users.cauanixos = {
         home.packages = with pkgs; [

@@ -1,7 +1,7 @@
 { ... }:
 
 {
-  flake.nixosModules.homeBat = { ... }:
+  flake.nixosModules.bat = { ... }:
     {
       home-manager.users.cauanixos = {
         programs.bat = {

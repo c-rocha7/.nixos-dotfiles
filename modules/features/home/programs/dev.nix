@@ -1,7 +1,7 @@
 { ... }:
 
 {
-  flake.nixosModules.homeCode = { pkgs, ... }:
+  flake.nixosModules.dev = { pkgs, ... }:
     {
       home-manager.users.cauanixos = {
         home.packages = with pkgs; [

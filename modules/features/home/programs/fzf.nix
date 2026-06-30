@@ -1,7 +1,7 @@
 { ... }:
 
 {
-  flake.nixosModules.homeFzf = { ... }:
+  flake.nixosModules.fzf = { ... }:
     {
       home-manager.users.cauanixos = {
         programs.fzf = {

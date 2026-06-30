@@ -1,7 +1,7 @@
 { inputs, ... }:
 
 {
-  flake.nixosModules.homeShared = { ... }:
+  flake.nixosModules.home = { ... }:
     {
       home-manager = {
         useGlobalPkgs = true;

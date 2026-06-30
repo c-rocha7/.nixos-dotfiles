@@ -1,7 +1,7 @@
 { inputs, ... }:
 
 {
-  flake.nixosModules.homeBrowser = { pkgs, ... }:
+  flake.nixosModules.browsers = { pkgs, ... }:
     {
       home-manager.users.cauanixos = {
         programs.firefox.enable = true;

@@ -23,17 +23,18 @@
       self.nixosModules.desktopConfiguration
       self.nixosModules.desktopStorage
 
-      self.nixosModules.homeShared
-      self.nixosModules.homeBat
-      self.nixosModules.homeBrowser
-      self.nixosModules.homeCode
-      self.nixosModules.homeEza
-      self.nixosModules.homeFzf
-      self.nixosModules.homeHeroic
-      self.nixosModules.homeObsidian
-      self.nixosModules.homeSpotifyPlayer
-      self.nixosModules.homeVesktop
-      self.nixosModules.homeZsh
+      self.nixosModules.home
+      self.nixosModules.bat
+      self.nixosModules.browsers
+      self.nixosModules.dev
+      self.nixosModules.eza
+      self.nixosModules.fzf
+      self.nixosModules.glaDesktopItem
+      self.nixosModules.heroic
+      self.nixosModules.obsidian
+      self.nixosModules.spotifyPlayer
+      self.nixosModules.vesktop
+      self.nixosModules.zsh
 
       self.nixosModules.btop
       self.nixosModules.cava

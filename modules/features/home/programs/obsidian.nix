@@ -1,7 +1,7 @@
 { ... }:
 
 {
-  flake.nixosModules.homeObsidian = { ... }:
+  flake.nixosModules.obsidian = { ... }:
     {
       home-manager.users.cauanixos = {
         programs.obsidian = {
