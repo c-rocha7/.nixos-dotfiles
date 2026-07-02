@@ -100,7 +100,9 @@
         enable = true;
         packages = [
           "com.github.tchx84.Flatseal"
+          "com.vysp3r.ProtonPlus"
           "io.github.flattool.Warehouse"
+          "io.github.Foldex.AdwSteamGtk"
           "io.github.kolunmi.Bazaar"
           "org.kde.kalk"
         ];
