@@ -13,6 +13,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    hyprland.url = "github:hyprwm/Hyprland";
+
     nix-flatpak.url = "github:gmodena/nix-flatpak";
 
     flake-parts.url = "github:hercules-ci/flake-parts";

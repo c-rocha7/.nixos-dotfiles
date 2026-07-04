@@ -32,6 +32,7 @@
       self.nixosModules.glaDesktopItem
       self.nixosModules.heroic
       self.nixosModules.obsidian
+      self.nixosModules.pavucontrol
       self.nixosModules.spotifyPlayer
       self.nixosModules.vesktop
       self.nixosModules.zsh
@@ -40,6 +41,8 @@
       self.nixosModules.cava
       self.nixosModules.fastfetch
       self.nixosModules.kitty
+      # self.nixosModules.rofi
+      self.nixosModules.waybar
       self.nixosModules.yazi
     ];
   };

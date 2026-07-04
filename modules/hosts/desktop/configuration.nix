@@ -1,4 +1,4 @@
-{ self, ... }:
+{ self, inputs, ... }:
 
 {
   flake.nixosModules.desktopConfiguration = { pkgs, lib, ... }:
@@ -6,6 +6,7 @@
       imports = [
         self.nixosModules.desktopHardware
         self.nixosModules.git
+        # self.nixosModules.niri
         self.nixosModules.vim
       ];
 
@@ -51,8 +52,17 @@
       services.xserver.enable = true;
       services.xserver.videoDrivers = [ "amdgpu" ];
 
-      services.displayManager.sddm.enable = true;
-      services.desktopManager.plasma6.enable = true;
+      # services.displayManager.sddm.enable = true;
+      # services.desktopManager.plasma6.enable = true;
+
+      services.displayManager.ly.enable = true;
+      programs.hyprland = {
+        enable = true;
+        xwayland.enable = true;
+
+        package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+        portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+      };
 
       fonts.fontconfig.enable = true;
       fonts.packages = with pkgs; [
@@ -117,6 +127,9 @@
         update.auto.enable = true;
         update.auto.onCalendar = "weekly";
       };
+
+      services.gnome.gnome-keyring.enable = true;
+      security.polkit.enable = true;
 
       services.pulseaudio.enable = false;
       security.rtkit.enable = true;
