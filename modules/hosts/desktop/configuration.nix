@@ -132,7 +132,7 @@
       users.users."cauanixos" = {
         isNormalUser = true;
         description = "Cauã R. Pereira";
-        extraGroups = [ "networkmanager" "wheel" ];
+        extraGroups = [ "networkmanager" "wheel" "libvirtd" ];
         shell = pkgs.zsh;
         packages = [ ];
       };
@@ -145,6 +145,16 @@
         man.enable = true;
         info.enable = true;
         nixos.enable = true;
+      };
+
+      programs.virt-manager.enable = true;
+      virtualisation.libvirtd = {
+        enable = true;
+        qemu = {
+          package = pkgs.qemu_kvm;
+          runAsRoot = true;
+          swtpm.enable = true;
+        };
       };
 
       nixpkgs.config.allowUnfree = true;
