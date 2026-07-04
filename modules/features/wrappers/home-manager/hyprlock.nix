@@ -1,0 +1,129 @@
+{ self, inputs, ... }:
+
+{
+  flake.nixosModules.hyprlock = { pkgs, ... }:
+    {
+      home-manager.users.cauanixos = {
+        programs.hyprlock = {
+          enable = true;
+          package = self.packages.${pkgs.stdenv.hostPlatform.system}.myHyprlock;
+        };
+      };
+    };
+
+  perSystem = { pkgs, ... }:
+    {
+      packages.myHyprlock = inputs.wrapper-modules.wrappers.hyprlock.wrap {
+        inherit pkgs;
+
+        settings = {
+          background = {
+            monitor = "";
+            path = "/home/cauanixos/Discos/ssd-480-gb/Pictures/Wallpapers/a_street_with_buildings_and_trees.png";
+            contrast = "0.8916";
+            brightness = "0.8172";
+            vibrancy = "0.1696";
+            vibrancy_darkness = "0.0";
+          };
+
+          general = {
+            ignore_empty_input = true;
+            hide_cursor = true;
+          };
+
+          animations = [
+            { animation = ["fade" 1 6 "default"]; }
+            { animation = ["fadeIn" 1 6 "default"]; }
+            { animation = ["fadeOut" 1 6 "default"]; }
+          ];
+
+          input-field = {
+            monitor = "DP-1";
+            size = "200, 50";
+            outline_thickness = "3";
+            dots_size = "0.33";
+            dots_spacing = "0.15";
+            dots_center = true;
+            dots_rounding = "-1";
+            fade_on_empty = true;
+            fade_timeout = "1000";
+            placeholder_text = "";
+            hide_input = false;
+            rounding = "40";
+            font_family = "FiraCode Nerd Font Propo";
+            fail_text = "<i>$FAIL <b>($ATTEMPTS)</b></i>";
+            fail_transition = "300";
+            capslock_color = "-1";
+            numlock_color = "-1";
+            bothlock_color = "-1";
+            invert_numlock = false;
+            swap_font_color = false;
+            position = "0, -153";
+            halign = "center";
+            valign = "center";
+            shadow_passes = "10";
+            shadow_size = "20";
+            shadow_boost = "1.6";
+          };
+
+          label = [
+            {
+              monitor = "DP-1";
+              text = "$TIME";
+              color = "rgba(216, 222, 233, 0.70)";
+              font_size = 140;
+              font_family = "FiraCode Nerd Font Propo Bold";
+              position = "0, 260";
+              halign = "center";
+              valign = "center";
+            }
+            {
+              monitor = "DP-1";
+              # text = cmd[update:1000] echo -e "$(date +"%A, %d %B %Y")";
+              color = "rgba(216, 222, 233, 0.70)";
+              font_size = 30;
+              font_family = "FiraCode Nerd Font Propo Bold";
+              position = "0, 150";
+              halign = "center";
+              valign = "center";
+            }
+            {
+              monitor = "DP-1";
+              text = "<span> </span>";
+              color = "rgba(216, 222, 233, 0.70)";
+              font_size = 24;
+              font_family = "FiraCode Nerd Font Propo Bold";
+              position = "2, -110";
+              halign = "center";
+              valign = "top";
+            }
+            {
+              monitor = "DP-1";
+              text = "$USER";
+              color = "rgba(216, 222, 233, 0.70)";
+              font_size = 20;
+              font_family = "FiraCode Nerd Font Propo Italic";
+              position = "0, -100";
+              halign = "center";
+              valign = "center";
+            }
+          ];
+
+          image = {
+            monitor = "DP-1";
+            path = "/home/cauaarch/Discos/SSD 480 GB/Pictures/Icons/dog-sword.jpg";
+            border_color = "rgba(216, 222, 233, 0.70)";
+            border_size = 3;
+            size = 160;
+            rounding = -1;
+            rotate = 0;
+            reload_time = -1;
+            reload_cmd = "";
+            position = "0, 15";
+            halign = "center";
+            valign = "center";
+          };
+        };
+      };
+    };
+}
