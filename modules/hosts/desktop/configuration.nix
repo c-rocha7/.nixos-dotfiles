@@ -13,6 +13,8 @@
       boot.loader.efi.canTouchEfiVariables = true;
       boot.loader.limine.enable = true;
 
+      boot.kernelPackages = pkgs.linuxPackages_zen;
+
       boot.kernelParams = [
         "amd_pstate=disable"
         "kernel.split_lock_mitigate=0"
