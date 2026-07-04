@@ -40,6 +40,7 @@
       self.nixosModules.cava
       self.nixosModules.fastfetch
       self.nixosModules.kitty
+      self.nixosModules.yazi
     ];
   };
 }
