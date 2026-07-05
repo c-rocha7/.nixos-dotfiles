@@ -12,20 +12,20 @@
         priority = 100;
       };
 
-      fileSystems."/home/cauanixos/Discos/ssd-480-gb" = {
-        device = "/dev/disk/by-uuid/6832CA9232CA6522";
+      fileSystems."/home/cauanixos/Discos/SSD 480 GB" = {
+        device = "/dev/disk/by-uuid/A69ABEBC9ABE8877";
         fsType = "ntfs3";
         options = [ "defaults" "uid=1000" "gid=100" "nofail" "windows_names" ];
       };
 
-      fileSystems."/home/cauanixos/Discos/ssd-512-gb" = {
-        device = "/dev/disk/by-uuid/724CA77F4CA73CAB";
+      fileSystems."/home/cauanixos/Discos/SSD 512 GB" = {
+        device = "/dev/disk/by-uuid/FC88C6D388C68C18";
         fsType = "ntfs3";
         options = [ "defaults" "uid=1000" "gid=100" "nofail" "windows_names" ];
       };
 
-      fileSystems."/home/cauanixos/Discos/hd-1-tb" = {
-        device = "/dev/disk/by-uuid/402EC0132EC0043E";
+      fileSystems."/home/cauanixos/Discos/HD 1 TB" = {
+        device = "/dev/disk/by-uuid/A488AEB388AE8380";
         fsType = "ntfs3";
         options = [ "defaults" "uid=1000" "gid=100" "nofail" "windows_names" ];
       };

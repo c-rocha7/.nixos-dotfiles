@@ -1,11 +1,11 @@
 { ... }:
 
 {
-  flake.nixosModules.unzip = { pkgs, ... }:
+  flake.nixosModules.onlyofficeDesktopeditors = { pkgs, ... }:
     {
       home-manager.users.cauanixos = {
         home.packages = with pkgs; [
-          unzip
+          onlyoffice-desktopeditors
         ];
       };
     };

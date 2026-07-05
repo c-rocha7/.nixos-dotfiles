@@ -17,13 +17,14 @@
         ];
       })
 
-      self.nixosModules.nixosSteam
-      self.nixosModules.nixLd
-
+      /*--- Desktop ---*/
       self.nixosModules.desktopConfiguration
       self.nixosModules.desktopStorage
 
+      /*--- Home ---*/
       self.nixosModules.home
+
+      /*--- Programs ---*/
       self.nixosModules.bat
       self.nixosModules.browsers
       self.nixosModules.dev
@@ -31,18 +32,24 @@
       self.nixosModules.fzf
       self.nixosModules.glaDesktopItem
       self.nixosModules.heroic
+      self.nixosModules.nil
+      self.nixosModules.nixd
+      self.nixosModules.nixpkgsFmt
       self.nixosModules.obsidian
-      self.nixosModules.pavucontrol
+      self.nixosModules.onlyofficeDesktopeditors
       self.nixosModules.spotifyPlayer
       self.nixosModules.vesktop
       self.nixosModules.zsh
 
+      /*--- Wrappers Modules NixOS ---*/
+      self.nixosModules.nixosSteam
+      self.nixosModules.nixLd
+
+      /*--- Wrappers Modules Home ---*/
       self.nixosModules.btop
       self.nixosModules.cava
       self.nixosModules.fastfetch
       self.nixosModules.kitty
-      # self.nixosModules.rofi
-      self.nixosModules.waybar
       self.nixosModules.yazi
     ];
   };

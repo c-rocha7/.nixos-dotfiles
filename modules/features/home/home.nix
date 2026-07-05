@@ -8,17 +8,12 @@
         useUserPackages = true;
         extraSpecialArgs = { inherit inputs; };
 
-        users.cauanixos = { pkgs, ... }: {
+        users.cauanixos = { ... }: {
           home.username = "cauanixos";
           home.homeDirectory = "/home/cauanixos";
           home.stateVersion = "26.05";
 
-          home.packages = with pkgs; [
-            onlyoffice-desktopeditors
-            nil
-            nixd
-            nixpkgs-fmt
-          ];
+          home.packages = [ ];
 
           programs.home-manager.enable = true;
         };
