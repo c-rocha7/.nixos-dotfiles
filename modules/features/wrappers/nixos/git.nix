@@ -19,9 +19,7 @@
             name = "Cauã R. Pereira";
             email = "7aauac@gmail.com";
           };
-          extraConfig = {
-            init.defaultBranch = "main";
-          };
+          init.defaultBranch = "main";
         };
       };
     };

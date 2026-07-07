@@ -133,7 +133,6 @@
         isNormalUser = true;
         description = "Cauã R. Pereira";
         extraGroups = [ "networkmanager" "wheel" "libvirtd" ];
-        # shell = pkgs.zsh;
         packages = [ ];
       };
 
@@ -162,6 +161,7 @@
       nix.settings = {
         auto-optimise-store = true;
         experimental-features = [ "nix-command" "flakes" ];
+        trusted-users = [ "root" "@wheel" ];
       };
 
       nix.gc = {
