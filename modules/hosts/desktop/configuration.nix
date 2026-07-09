@@ -155,6 +155,7 @@
           swtpm.enable = true;
         };
       };
+      networking.firewall.checkReversePath = "loose";
 
       nixpkgs.config.allowUnfree = true;
 
