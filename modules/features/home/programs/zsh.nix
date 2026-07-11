@@ -63,6 +63,7 @@
             ff = "fastfetch";
             nrsd = "sudo nixos-rebuild switch --flake ~/.nixos-dotfiles#desktop";
             nrbd = "sudo nixos-rebuild boot --flake ~/.nixos-dotfiles#desktop";
+            nfu = "sudo nix flake update --flake ~/.nixos-dotfiles";
           };
         };
       };

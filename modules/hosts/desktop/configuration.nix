@@ -1,7 +1,7 @@
-{ self, ... }:
+{ self, inputs, ... }:
 
 {
-  flake.nixosModules.desktopConfiguration = { pkgs, lib, ... }:
+  flake.nixosModules.desktopConfiguration = { pkgs, lib, config, ... }:
     {
       imports = [
         self.nixosModules.desktopHardware
@@ -51,8 +51,68 @@
       services.xserver.enable = true;
       services.xserver.videoDrivers = [ "amdgpu" ];
 
-      services.displayManager.sddm.enable = true;
-      services.desktopManager.plasma6.enable = true;
+      services.displayManager.ly.enable = true;
+      programs.hyprland = {
+        enable = true;
+        xwayland.enable = true;
+        package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+        portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+      };
+
+      security.polkit.enable = true;
+
+      systemd.user.services.polkit-gnome-authentication-agent-1 = {
+        description = "polkit-gnome-authentication-agent-1";
+        wantedBy = [ "graphical-session.target" ];
+        wants = [ "graphical-session.target" ];
+        after = [ "graphical-session.target" ];
+        serviceConfig = {
+          Type = "simple";
+          ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+          Restart = "on-failure";
+          RestartSec = 1;
+          TimeoutStopSec = 10;
+        };
+      };
+
+      stylix = {
+        enable = true;
+        base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
+        polarity = "dark";
+
+        icons = {
+          enable = true;
+          package = pkgs.papirus-icon-theme;
+          dark = "Papirus-Dark";
+          light = "Papirus-Light";
+        };
+
+        cursor = {
+          package = pkgs.bibata-cursors;
+          name = "Bibata-Modern-Ice";
+          size = 24;
+        };
+
+        fonts = {
+          serif = { name = "LiterationSerif Nerd Font"; };
+          sansSerif = { name = "LiterationSans Nerd Font"; };
+          monospace = { name = "LiterationMono Nerd Font"; };
+          emoji = { name = "Noto Color Emoji"; };
+        };
+      };
+
+      xdg.portal = {
+        enable = true;
+        extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
+        xdgOpenUsePortal = true;
+        configPackages = [ config.programs.hyprland.package ];
+        config.hyprland = {
+          default = [ "hyprland" "gtk" ];
+          "org.freedesktop.impl.portal.OpenURI" = "gtk";
+          "org.freedesktop.impl.portal.FileChooser" = "gtk";
+          "org.freedesktop.impl.portal.Print" = "gtk";
+        };
+      };
 
       fonts.fontconfig.enable = true;
       fonts.packages = with pkgs; [
@@ -106,7 +166,11 @@
           "io.github.flattool.Warehouse"
           "io.github.Foldex.AdwSteamGtk"
           "io.github.kolunmi.Bazaar"
-          "org.kde.kalk"
+          "org.gnome.Calculator"
+          "org.gnome.Calendar"
+          "org.gnome.TextEditor"
+          "org.gnome.clocks"
+          "io.missioncenter.MissionCenter"
         ];
         remotes = lib.mkOptionDefault [
           {
@@ -137,6 +201,18 @@
       };
 
       programs.zsh.enable = true;
+
+      programs.thunar = {
+        enable = true;
+        plugins = with pkgs; [
+          thunar-archive-plugin
+          thunar-media-tags-plugin
+          thunar-volman
+        ];
+      };
+      services.gvfs.enable = true;
+      services.tumbler.enable = true;
+      programs.xfconf.enable = true;
 
       documentation = {
         dev.enable = true;
