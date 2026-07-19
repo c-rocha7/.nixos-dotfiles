@@ -141,7 +141,7 @@
 
           # hotkey-overlay = { };
 
-          screenshot-path = "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png";
+          screenshot-path = "~/Imagens/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png";
 
           # animations = { };
 
@@ -170,7 +170,7 @@
           binds = {
             "Mod+Shift+Slash" = { show-hotkey-overlay = _: { }; };
 
-            "Mod+T".spawn-sh = lib.getExe pkgs.kitty;
+            "Mod+T".spawn-sh = lib.getExe self'.packages.myKitty;
 
             # "Mod+S".spawn-sh = "${lib.getExe self'.packages.noctalia-shell} ipc call launcher toggle";
 

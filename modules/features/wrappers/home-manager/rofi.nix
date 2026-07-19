@@ -22,6 +22,7 @@
           disable-history = true;
           icon-theme = "Papirus";
         };
+
         theme = {
           "*" = {
             base = "#1e1e2e";

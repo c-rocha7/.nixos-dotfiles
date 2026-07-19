@@ -20,7 +20,6 @@
 
       /*--- Desktop ---*/
       self.nixosModules.desktopConfiguration
-      self.nixosModules.desktopStorage
 
       /*--- Home ---*/
       self.nixosModules.home
@@ -34,7 +33,6 @@
       self.nixosModules.fzf
       self.nixosModules.glaDesktopItem
       self.nixosModules.heroic
-      self.nixosModules.networkManagerApplet
       self.nixosModules.nil
       self.nixosModules.nixd
       self.nixosModules.nixpkgsFmt
@@ -44,9 +42,12 @@
       self.nixosModules.pavucontrol
       self.nixosModules.qview
       self.nixosModules.spotifyPlayer
+      self.nixosModules.stylix
       self.nixosModules.unrar
       self.nixosModules.unzip
       self.nixosModules.vesktop
+      self.nixosModules.xarchiver
+      self.nixosModules.xdg
       self.nixosModules.zip
       self.nixosModules.zsh
 
@@ -58,11 +59,9 @@
       self.nixosModules.btop
       self.nixosModules.cava
       self.nixosModules.fastfetch
-      self.nixosModules.hyprlock
       self.nixosModules.kitty
       self.nixosModules.mpv
       self.nixosModules.rofi
-      self.nixosModules.waybar
       self.nixosModules.yazi
     ];
   };

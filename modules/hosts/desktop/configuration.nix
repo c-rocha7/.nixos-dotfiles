@@ -6,6 +6,7 @@
       imports = [
         self.nixosModules.desktopHardware
         self.nixosModules.git
+        self.nixosModules.niri
         self.nixosModules.vim
       ];
 
@@ -52,78 +53,23 @@
       services.xserver.videoDrivers = [ "amdgpu" ];
 
       services.displayManager.ly.enable = true;
-      programs.hyprland = {
-        enable = true;
-        xwayland.enable = true;
-        package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-        portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
-      };
 
       security.polkit.enable = true;
 
-      systemd.user.services.polkit-gnome-authentication-agent-1 = {
-        description = "polkit-gnome-authentication-agent-1";
-        wantedBy = [ "graphical-session.target" ];
-        wants = [ "graphical-session.target" ];
-        after = [ "graphical-session.target" ];
-        serviceConfig = {
-          Type = "simple";
-          ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-          Restart = "on-failure";
-          RestartSec = 1;
-          TimeoutStopSec = 10;
-        };
-      };
-
-      stylix = {
-        enable = true;
-        base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
-        polarity = "dark";
-
-        icons = {
-          enable = true;
-          package = pkgs.papirus-icon-theme;
-          dark = "Papirus-Dark";
-          light = "Papirus-Light";
-        };
-
-        cursor = {
-          package = pkgs.bibata-cursors;
-          name = "Bibata-Modern-Ice";
-          size = 24;
-        };
-
-        fonts = {
-          serif = { name = "LiterationSerif Nerd Font"; };
-          sansSerif = { name = "LiterationSans Nerd Font"; };
-          monospace = { name = "LiterationMono Nerd Font"; };
-          emoji = { name = "Noto Color Emoji"; };
-        };
-      };
-
-      xdg.portal = {
-        enable = true;
-        extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
-        xdgOpenUsePortal = true;
-        configPackages = [ config.programs.hyprland.package ];
-        config.hyprland = {
-          default = [ "hyprland" "gtk" ];
-          "org.freedesktop.impl.portal.OpenURI" = "gtk";
-          "org.freedesktop.impl.portal.FileChooser" = "gtk";
-          "org.freedesktop.impl.portal.Print" = "gtk";
-        };
-      };
+      # programs.dconf.enable = true;
 
       fonts.fontconfig.enable = true;
       fonts.packages = with pkgs; [
         font-awesome
         nerd-fonts.comic-shanns-mono
+        nerd-fonts.dejavu-sans-mono
         nerd-fonts.fantasque-sans-mono
         nerd-fonts.fira-code
         nerd-fonts.fira-mono
         nerd-fonts.liberation
         nerd-fonts.jetbrains-mono
         nerd-fonts.space-mono
+        nerd-fonts.symbols-only
         noto-fonts
         noto-fonts-cjk-sans
         noto-fonts-cjk-serif
@@ -161,16 +107,16 @@
       services.flatpak = {
         enable = true;
         packages = [
-          "com.github.tchx84.Flatseal"
-          "com.vysp3r.ProtonPlus"
-          "io.github.flattool.Warehouse"
-          "io.github.Foldex.AdwSteamGtk"
-          "io.github.kolunmi.Bazaar"
-          "org.gnome.Calculator"
-          "org.gnome.Calendar"
-          "org.gnome.TextEditor"
-          "org.gnome.clocks"
-          "io.missioncenter.MissionCenter"
+          # "com.github.tchx84.Flatseal"
+          # "com.vysp3r.ProtonPlus"
+          # "io.github.flattool.Warehouse"
+          # "io.github.Foldex.AdwSteamGtk"
+          # "io.github.kolunmi.Bazaar"
+          # "org.gnome.Calculator"
+          # "org.gnome.Calendar"
+          # "org.gnome.TextEditor"
+          # "org.gnome.clocks"
+          # "io.missioncenter.MissionCenter"
         ];
         remotes = lib.mkOptionDefault [
           {

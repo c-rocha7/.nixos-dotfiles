@@ -61,8 +61,8 @@
             la = "ls -a";
             bat = "bat --style=auto";
             ff = "fastfetch";
-            nrsd = "sudo nixos-rebuild switch --flake ~/.nixos-dotfiles#desktop";
-            nrbd = "sudo nixos-rebuild boot --flake ~/.nixos-dotfiles#desktop";
+            nrsfd = "sudo nixos-rebuild switch --flake ~/.nixos-dotfiles#desktop";
+            nrbfd = "sudo nixos-rebuild boot --flake ~/.nixos-dotfiles#desktop";
             nfu = "sudo nix flake update --flake ~/.nixos-dotfiles";
           };
         };
