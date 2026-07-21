@@ -1,142 +1,133 @@
-{ self, inputs, ... }: {
+{ self, ... }:
 
-  flake.nixosModules.laptopConfiguration = { config, pkgs, ... }:
+{
+  flake.nixosModules.laptopConfiguration = { pkgs, lib, ... }:
 
     {
-        imports =
-            [ # Include the results of the hardware scan.
-                self.nixosModules.laptopHardware
-            ];
-
-        # Bootloader.
-        boot.loader.systemd-boot.enable = true;
-        boot.loader.efi.canTouchEfiVariables = true;
-
-        networking.hostName = "nixos"; # Define your hostname.
-        # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-        # Configure network proxy if necessary
-        # networking.proxy.default = "http://user:password@proxy:port/";
-        # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-        # Enable networking
-        networking.networkmanager.enable = true;
-
-        # Set your time zone.
-        time.timeZone = "America/Sao_Paulo";
-
-        # Select internationalisation properties.
-        i18n.defaultLocale = "pt_BR.UTF-8";
-
-        i18n.extraLocaleSettings = {
-            LC_ADDRESS = "pt_BR.UTF-8";
-            LC_IDENTIFICATION = "pt_BR.UTF-8";
-            LC_MEASUREMENT = "pt_BR.UTF-8";
-            LC_MONETARY = "pt_BR.UTF-8";
-            LC_NAME = "pt_BR.UTF-8";
-            LC_NUMERIC = "pt_BR.UTF-8";
-            LC_PAPER = "pt_BR.UTF-8";
-            LC_TELEPHONE = "pt_BR.UTF-8";
-            LC_TIME = "pt_BR.UTF-8";
-        };
-
-        # Enable the X11 windowing system.
-        # You can disable this if you're only using the Wayland session.
-        services.xserver.enable = true;
-
-        # Enable the KDE Plasma Desktop Environment.
-        services.displayManager.sddm.enable = true;
-        services.desktopManager.plasma6.enable = true;
-
-        # Configure keymap in X11
-        services.xserver.xkb = {
-            layout = "br";
-            variant = "";
-        };
-
-        # Configure console keymap
-        console.keyMap = "br-abnt2";
-
-        # Enable CUPS to print documents.
-        services.printing.enable = true;
-
-        # Enable sound with pipewire.
-        services.pulseaudio.enable = false;
-        security.rtkit.enable = true;
-        services.pipewire = {
-            enable = true;
-            alsa.enable = true;
-            alsa.support32Bit = true;
-            pulse.enable = true;
-            # If you want to use JACK applications, uncomment this
-            #jack.enable = true;
-
-            # use the example session manager (no others are packaged yet so this is enabled by default,
-            # no need to redefine it in your config for now)
-            #media-session.enable = true;
-        };
-
-        # Enable touchpad support (enabled default in most desktopManager).
-        # services.xserver.libinput.enable = true;
-
-        # Define a user account. Don't forget to set a password with ‘passwd’.
-        users.users."cauanixos" = {
-            isNormalUser = true;
-            description = "Cauã Rocha Pereira";
-            extraGroups = [ "networkmanager" "wheel" ];
-            packages = with pkgs; [
-            kdePackages.kate
-            #  thunderbird
-            ];
-        };
-
-        # Install firefox.
-        programs.firefox.enable = true;
-
-        # Install vscode
-        programs.vscode.enable = true;
-
-        # Allow unfree packages
-        nixpkgs.config.allowUnfree = true;
-
-        # List packages installed in system profile. To search, run:
-        # $ nix search wget
-        environment.systemPackages = with pkgs; [
-        #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-        #  wget
-            git
+      imports =
+        [
+          self.nixosModules.laptopHardware
         ];
 
-        nix.settings = {
-            auto-optimise-store = true;
-            experimental-features = [ "nix-command" "flakes" ];
-        };
+      boot.loader.systemd-boot.enable = false;
+      boot.loader.efi.canTouchEfiVariables = true;
+      boot.loader.limine.enable = true;
 
-        # Some programs need SUID wrappers, can be configured further or are
-        # started in user sessions.
-        # programs.mtr.enable = true;
-        # programs.gnupg.agent = {
-        #   enable = true;
-        #   enableSSHSupport = true;
-        # };
+      boot.kernelPackages = pkgs.linuxPackages_zen;
 
-        # List services that you want to enable:
+      networking.hostName = "nixos-laptop";
 
-        # Enable the OpenSSH daemon.
-        # services.openssh.enable = true;
+      networking.networkmanager.enable = true;
 
-        # Open ports in the firewall.
-        # networking.firewall.allowedTCPPorts = [ ... ];
-        # networking.firewall.allowedUDPPorts = [ ... ];
-        # Or disable the firewall altogether.
-        # networking.firewall.enable = false;
+      time.timeZone = "America/Sao_Paulo";
 
-        # This value determines the NixOS release from which the default
-        # settings for stateful data, like file locations and database versions
-        # on your system were taken. It‘s perfectly fine and recommended to leave
-        # this value at the release version of the first install of this system.
-        # Before changing this value read the documentation for this option
-        # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-        system.stateVersion = "26.05"; # Did you read the comment?
+      i18n.defaultLocale = "pt_BR.UTF-8";
+
+      i18n.extraLocaleSettings = {
+        LC_ADDRESS = "pt_BR.UTF-8";
+        LC_IDENTIFICATION = "pt_BR.UTF-8";
+        LC_MEASUREMENT = "pt_BR.UTF-8";
+        LC_MONETARY = "pt_BR.UTF-8";
+        LC_NAME = "pt_BR.UTF-8";
+        LC_NUMERIC = "pt_BR.UTF-8";
+        LC_PAPER = "pt_BR.UTF-8";
+        LC_TELEPHONE = "pt_BR.UTF-8";
+        LC_TIME = "pt_BR.UTF-8";
+      };
+
+      services.displayManager.sddm.enable = true;
+      services.desktopManager.plasma6.enable = true;
+
+      fonts.fontconfig.enable = true;
+      fonts.packages = with pkgs; [
+        font-awesome
+        nerd-fonts.comic-shanns-mono
+        nerd-fonts.dejavu-sans-mono
+        nerd-fonts.fantasque-sans-mono
+        nerd-fonts.fira-code
+        nerd-fonts.fira-mono
+        nerd-fonts.liberation
+        nerd-fonts.jetbrains-mono
+        nerd-fonts.space-mono
+        nerd-fonts.symbols-only
+        noto-fonts
+        noto-fonts-cjk-sans
+        noto-fonts-cjk-serif
+        noto-fonts-color-emoji
+        noto-fonts-monochrome-emoji
+      ];
+
+      services.xserver.xkb = {
+        layout = "br";
+        variant = "";
+      };
+
+      console.keyMap = "br-abnt2";
+
+      services.printing.enable = true;
+
+      services.flatpak = {
+        enable = true;
+        packages = [ ];
+        remotes = lib.mkOptionDefault [
+          {
+            name = "flathub";
+            location = "https://dl.flathub.org/repo/flathub.flatpakrepo";
+          }
+        ];
+        update.auto.enable = true;
+        update.auto.onCalendar = "weekly";
+      };
+
+      services.pulseaudio.enable = false;
+      security.rtkit.enable = true;
+      services.pipewire = {
+        enable = true;
+        alsa.enable = true;
+        alsa.support32Bit = true;
+        pulse.enable = true;
+        jack.enable = true;
+        wireplumber.enable = true;
+      };
+
+      users.users."cauanixos" = {
+        isNormalUser = true;
+        description = "Cauã Rocha Pereira";
+        extraGroups = [ "networkmanager" "wheel" ];
+        packages = with pkgs; [
+          kdePackages.kate
+        ];
+      };
+
+      documentation = {
+        dev.enable = true;
+        doc.enable = true;
+        man.enable = true;
+        info.enable = true;
+        nixos.enable = true;
+      };
+
+      programs.firefox.enable = true;
+
+      programs.vscode.enable = true;
+
+      nixpkgs.config.allowUnfree = true;
+
+      nix.settings = {
+        auto-optimise-store = true;
+        experimental-features = [ "nix-command" "flakes" ];
+      };
+
+      nix.gc = {
+        automatic = true;
+        dates = "weekly";
+        options = "--delete-older-than 7d";
+      };
+
+      environment.systemPackages = with pkgs; [
+        git
+      ];
+
+      system.stateVersion = "26.05";
     };
 }
