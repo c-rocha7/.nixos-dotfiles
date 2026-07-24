@@ -21,7 +21,7 @@
 
       fileSystems."/" =
         {
-          device = "/dev/disk/by-uuid/12663da0-91a8-462c-94b4-2681fe3157eb";
+          device = "/dev/disk/by-uuid/857956e2-b38d-4035-9768-4dabb598bda9";
           fsType = "ext4";
           options =
             [
@@ -32,7 +32,7 @@
 
       fileSystems."/boot" =
         {
-          device = "/dev/disk/by-uuid/846B-6EA2";
+          device = "/dev/disk/by-uuid/9164-58C1";
           fsType = "vfat";
           options =
             [

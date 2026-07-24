@@ -24,6 +24,7 @@
       self.nixosModules.home
 
       /*--- Programs ---*/
+      self.nixosModules.bat
       self.nixosModules.browsers
       self.nixosModules.dev
       self.nixosModules.eza

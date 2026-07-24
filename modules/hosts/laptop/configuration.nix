@@ -7,6 +7,8 @@
       imports =
         [
           self.nixosModules.laptopHardware
+          self.nixosModules.git
+          self.nixosModules.vim
         ];
 
       boot.loader.systemd-boot.enable = false;
@@ -94,9 +96,7 @@
         isNormalUser = true;
         description = "Cauã Rocha Pereira";
         extraGroups = [ "networkmanager" "wheel" ];
-        packages = with pkgs; [
-          kdePackages.kate
-        ];
+        packages = with pkgs; [ ];
       };
 
       documentation = {
@@ -107,15 +107,12 @@
         nixos.enable = true;
       };
 
-      programs.firefox.enable = true;
-
-      programs.vscode.enable = true;
-
       nixpkgs.config.allowUnfree = true;
 
       nix.settings = {
         auto-optimise-store = true;
         experimental-features = [ "nix-command" "flakes" ];
+        trusted-users = [ "root" "@wheel" ];
       };
 
       nix.gc = {
@@ -124,9 +121,7 @@
         options = "--delete-older-than 7d";
       };
 
-      environment.systemPackages = with pkgs; [
-        git
-      ];
+      environment.systemPackages = with pkgs; [ ];
 
       system.stateVersion = "26.05";
     };
