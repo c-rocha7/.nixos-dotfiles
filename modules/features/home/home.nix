@@ -1,7 +1,7 @@
 { inputs, ... }:
 
 {
-  flake.nixosModules.home = { ... }:
+  flake.nixosModules.home = { pkgs, ... }:
     {
       home-manager = {
         useGlobalPkgs = false;
@@ -24,7 +24,10 @@
           home.homeDirectory = "/home/cauanixos";
           home.stateVersion = "26.05";
 
-          home.packages = [ ];
+          home.packages = with pkgs; [
+            papirus-icon-theme
+            bibata-cursors
+          ];
 
           programs.home-manager.enable = true;
         };
