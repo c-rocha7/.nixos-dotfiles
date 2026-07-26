@@ -1,7 +1,7 @@
-{ self, inputs, ... }:
+{ self, ... }:
 
 {
-  flake.nixosModules.desktopConfiguration = { pkgs, lib, config, ... }:
+  flake.nixosModules.desktopConfiguration = { pkgs, lib, ... }:
     {
       imports = [
         self.nixosModules.desktopHardware
@@ -56,8 +56,6 @@
 
       security.polkit.enable = true;
 
-      # programs.dconf.enable = true;
-
       fonts.fontconfig.enable = true;
       fonts.packages = with pkgs; [
         font-awesome
@@ -106,18 +104,7 @@
 
       services.flatpak = {
         enable = true;
-        packages = [
-          # "com.github.tchx84.Flatseal"
-          # "com.vysp3r.ProtonPlus"
-          # "io.github.flattool.Warehouse"
-          # "io.github.Foldex.AdwSteamGtk"
-          # "io.github.kolunmi.Bazaar"
-          # "org.gnome.Calculator"
-          # "org.gnome.Calendar"
-          # "org.gnome.TextEditor"
-          # "org.gnome.clocks"
-          # "io.missioncenter.MissionCenter"
-        ];
+        packages = [ ];
         remotes = lib.mkOptionDefault [
           {
             name = "flathub";

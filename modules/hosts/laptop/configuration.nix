@@ -2,7 +2,6 @@
 
 {
   flake.nixosModules.laptopConfiguration = { pkgs, lib, ... }:
-
     {
       imports =
         [
@@ -96,7 +95,7 @@
         isNormalUser = true;
         description = "Cauã Rocha Pereira";
         extraGroups = [ "networkmanager" "wheel" ];
-        packages = with pkgs; [ ];
+        packages = [ ];
       };
 
       documentation = {
@@ -121,7 +120,7 @@
         options = "--delete-older-than 7d";
       };
 
-      environment.systemPackages = with pkgs; [ ];
+      environment.systemPackages = [ ];
 
       system.stateVersion = "26.05";
     };

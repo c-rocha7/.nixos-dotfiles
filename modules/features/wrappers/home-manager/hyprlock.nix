@@ -32,9 +32,9 @@
           };
 
           animations = [
-            { animation = ["fade" 1 6 "default"]; }
-            { animation = ["fadeIn" 1 6 "default"]; }
-            { animation = ["fadeOut" 1 6 "default"]; }
+            { animation = [ "fade" 1 6 "default" ]; }
+            { animation = [ "fadeIn" 1 6 "default" ]; }
+            { animation = [ "fadeOut" 1 6 "default" ]; }
           ];
 
           input-field = {
@@ -79,7 +79,6 @@
             }
             {
               monitor = "DP-1";
-              # text = cmd[update:1000] echo -e "$(date +"%A, %d %B %Y")";
               color = "rgba(216, 222, 233, 0.70)";
               font_size = 30;
               font_family = "FiraCode Nerd Font Propo Bold";
