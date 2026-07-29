@@ -29,6 +29,7 @@
       self.nixosModules.dev
       self.nixosModules.eza
       self.nixosModules.fzf
+      self.nixosModules.ghostty
       self.nixosModules.nil
       self.nixosModules.nixd
       self.nixosModules.nixpkgsFmt
