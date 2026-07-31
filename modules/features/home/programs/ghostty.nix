@@ -10,20 +10,38 @@
 
           settings = {
             command = "${pkgs.zsh}/bin/zsh";
+
+            # Aparência
             theme = "catppuccin-mocha";
             font-size = 12.0;
             font-family = "FiraCode Nerd Font";
             background-opacity = 0.95;
+            window-padding-x = 8;
+            window-padding-y = 8;
+            cursor-style = "block";
+            cursor-style-blink = false;
+            window-width = 120;
+            window-height = 40;
+
+            # Comportamento
+            copy-on-select = true;
+            scrollback-limit = 10000;
+
+            # Atalhos
             keybind = [
-              # Dividir a tela (splits)
+              # Divisões
               "ctrl+shift+e=new_split:right"
               "ctrl+shift+o=new_split:down"
+              "ctrl+shift+w=close_surface"
+              "ctrl+shift+f=toggle_split_zoom"
 
-              # Navegar entre divisões
+              # Navegação
               "ctrl+alt+left=goto_split:left"
               "ctrl+alt+right=goto_split:right"
+              "ctrl+alt+up=goto_split:top"
+              "ctrl+alt+down=goto_split:bottom"
 
-              # Copiar / Colar inteligente (apenas executa 'copy' se houver seleção)
+              # Área de transferência
               "performable:ctrl+c=copy_to_clipboard"
               "ctrl+v=paste_from_clipboard"
             ];
