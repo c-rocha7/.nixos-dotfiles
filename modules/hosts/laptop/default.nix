@@ -30,7 +30,6 @@
       self.nixosModules.eza
       self.nixosModules.fzf
       self.nixosModules.ghostty
-      self.nixosModules.glaDesktopItem
       self.nixosModules.nil
       self.nixosModules.nixd
       self.nixosModules.nixpkgsFmt
@@ -48,6 +47,7 @@
       self.nixosModules.cava
       self.nixosModules.fastfetch
       self.nixosModules.kitty
+      self.nixosModules.mpv
       self.nixosModules.yazi
     ];
   };
