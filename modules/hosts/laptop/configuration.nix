@@ -42,13 +42,16 @@
       fonts.fontconfig.enable = true;
       fonts.packages = with pkgs; [
         font-awesome
+        nerd-fonts.code-new-roman
         nerd-fonts.comic-shanns-mono
         nerd-fonts.dejavu-sans-mono
         nerd-fonts.fantasque-sans-mono
         nerd-fonts.fira-code
         nerd-fonts.fira-mono
-        nerd-fonts.liberation
         nerd-fonts.jetbrains-mono
+        nerd-fonts.liberation
+        nerd-fonts.noto
+        nerd-fonts.roboto-mono
         nerd-fonts.space-mono
         nerd-fonts.symbols-only
         noto-fonts
@@ -97,7 +100,7 @@
       users.users."cauanixos" = {
         isNormalUser = true;
         description = "Cauã Rocha Pereira";
-        extraGroups = [ "networkmanager" "wheel" ];
+        extraGroups = [ "networkmanager" "wheel" "libvirtd" ];
         packages = [ ];
       };
 
@@ -108,6 +111,17 @@
         info.enable = true;
         nixos.enable = true;
       };
+
+      programs.virt-manager.enable = true;
+      virtualisation.libvirtd = {
+        enable = true;
+        qemu = {
+          package = pkgs.qemu_kvm;
+          runAsRoot = true;
+          swtpm.enable = true;
+        };
+      };
+      networking.firewall.checkReversePath = "loose";
 
       nixpkgs.config.allowUnfree = true;
 
@@ -124,6 +138,11 @@
       };
 
       environment.systemPackages = [ ];
+
+      environment.sessionVariables = {
+        MESA_SHADER_CACHE_MAX_SIZE = "12G";
+        GTK_IM_MODULE = "simple";
+      };
 
       system.stateVersion = "26.05";
     };
