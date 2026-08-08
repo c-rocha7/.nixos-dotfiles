@@ -72,7 +72,9 @@
 
       services.flatpak = {
         enable = true;
-        packages = [ ];
+        packages = [
+          "com.ranfdev.DistroShelf"
+        ];
         remotes = lib.mkOptionDefault [
           {
             name = "flathub";
@@ -97,6 +99,10 @@
         wireplumber.enable = true;
       };
 
+      services.udev.extraRules = ''
+        KERNEL=="ttyACM*", ATTRS{idVendor}=="0324", ATTRS{idProduct}=="0324", SYMLINK+="minitela_display", MODE="0666"
+      '';
+
       users.users."cauanixos" = {
         isNormalUser = true;
         description = "Cauã Rocha Pereira";
@@ -112,16 +118,10 @@
         nixos.enable = true;
       };
 
-      programs.virt-manager.enable = true;
-      virtualisation.libvirtd = {
+      virtualisation.podman = {
         enable = true;
-        qemu = {
-          package = pkgs.qemu_kvm;
-          runAsRoot = true;
-          swtpm.enable = true;
-        };
+        dockerCompat = true;
       };
-      networking.firewall.checkReversePath = "loose";
 
       nixpkgs.config.allowUnfree = true;
 
@@ -141,7 +141,7 @@
 
       environment.sessionVariables = {
         MESA_SHADER_CACHE_MAX_SIZE = "12G";
-        GTK_IM_MODULE = "simple";
+        # GTK_IM_MODULE = "simple";
       };
 
       system.stateVersion = "26.05";

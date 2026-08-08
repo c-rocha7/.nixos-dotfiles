@@ -2,7 +2,7 @@
 
 {
   flake.nixosModules.stylix = { pkgs, ... }:
-   {
+    {
       home-manager.users.cauanixos = {
         imports = [
           inputs.stylix.homeModules.stylix
@@ -36,5 +36,5 @@
           polarity = "dark";
         };
       };
-   };
+    };
 }
