@@ -106,7 +106,7 @@
       users.users."cauanixos" = {
         isNormalUser = true;
         description = "Cauã Rocha Pereira";
-        extraGroups = [ "networkmanager" "wheel" "libvirtd" ];
+        extraGroups = [ "networkmanager" "wheel" "podman" ];
         packages = [ ];
       };
 
