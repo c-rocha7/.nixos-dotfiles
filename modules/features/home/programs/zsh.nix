@@ -40,6 +40,18 @@
             bindkey "^[[3;5~" kill-word
             bindkey "^[[1;5D" backward-word
             bindkey "^[[1;5C" forward-word
+
+            # Remove o arquivo de persistência e desativa opções de histórico do Oh-My-Zsh
+            unset HISTFILE
+            unsetopt share_history
+            unsetopt append_history
+            unsetopt inc_append_history
+
+            # Ativação do Mise (verifica se o binário existe antes de rodar)
+            if [[ -f "$HOME/.local/bin/mise" ]]; then
+              eval "$($HOME/.local/bin/mise activate zsh)"
+              eval "$($HOME/.local/bin/mise completion zsh)"
+            fi
           '';
 
           oh-my-zsh = {
@@ -48,9 +60,9 @@
 
           history = {
             size = 10000;
-            save = 10000;
-            share = true;
-            ignoreDups = true;
+            save = 0;
+            path = "/dev/null";
+            share = false;
           };
 
           shellAliases = {
@@ -70,7 +82,11 @@
             nrsfl = "sudo nixos-rebuild switch --flake ~/.nixos-dotfiles#laptop";
             nrbfl = "sudo nixos-rebuild boot --flake ~/.nixos-dotfiles#laptop";
 
+            /* Nix Flake Update */
             nfu = "sudo nix flake update --flake ~/.nixos-dotfiles";
+
+            /* Distrobox */
+            arch = "distrobox enter arch";
           };
         };
       };

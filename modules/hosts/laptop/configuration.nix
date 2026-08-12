@@ -16,7 +16,7 @@
 
       boot.kernelPackages = pkgs.linuxPackages_zen;
 
-      networking.hostName = "nixos-laptop";
+      networking.hostName = "vision-r15m";
 
       networking.networkmanager.enable = true;
 
@@ -72,9 +72,7 @@
 
       services.flatpak = {
         enable = true;
-        packages = [
-          "com.ranfdev.DistroShelf"
-        ];
+        packages = [ ];
         remotes = lib.mkOptionDefault [
           {
             name = "flathub";
@@ -99,10 +97,6 @@
         wireplumber.enable = true;
       };
 
-      services.udev.extraRules = ''
-        KERNEL=="ttyACM*", ATTRS{idVendor}=="0324", ATTRS{idProduct}=="0324", SYMLINK+="minitela_display", MODE="0666"
-      '';
-
       users.users."cauanixos" = {
         isNormalUser = true;
         description = "Cauã Rocha Pereira";
@@ -121,6 +115,7 @@
       virtualisation.podman = {
         enable = true;
         dockerCompat = true;
+        defaultNetwork.settings.dns_enabled = true;
       };
 
       nixpkgs.config.allowUnfree = true;
@@ -128,7 +123,6 @@
       nix.settings = {
         auto-optimise-store = true;
         experimental-features = [ "nix-command" "flakes" ];
-        trusted-users = [ "root" "@wheel" ];
       };
 
       nix.gc = {
@@ -141,7 +135,6 @@
 
       environment.sessionVariables = {
         MESA_SHADER_CACHE_MAX_SIZE = "12G";
-        # GTK_IM_MODULE = "simple";
       };
 
       system.stateVersion = "26.05";
