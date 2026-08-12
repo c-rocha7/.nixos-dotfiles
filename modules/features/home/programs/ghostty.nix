@@ -8,27 +8,13 @@
           enable = true;
           enableZshIntegration = true;
 
-          package = (pkgs.symlinkJoin {
-            name = "ghostty-wrapped";
-            paths = [ pkgs.ghostty ];
-            nativeBuildInputs = [ pkgs.makeWrapper ];
-            postBuild = ''
-              wrapProgram $out/bin/ghostty \
-                --set GTK_IM_MODULE "simple"
-            '';
-          }).overrideAttrs (oldAttrs: {
-            meta = (oldAttrs.meta or { }) // {
-              mainProgram = "ghostty";
-            };
-          });
-
           settings = {
             command = "${pkgs.zsh}/bin/zsh";
 
             # Aparência
             theme = "catppuccin-mocha";
             font-size = 12.0;
-            font-family = "FiraCode Nerd Font";
+            font-family = "FantasqueSansM Nerd Font";
             background-opacity = 0.95;
             window-padding-x = 8;
             window-padding-y = 8;
@@ -88,15 +74,6 @@
               selection-foreground = "cdd6f4";
             };
           };
-        };
-
-        xdg.desktopEntries.com-mitchellh-ghostty = {
-          name = "Ghostty";
-          exec = "env GTK_IM_MODULE=simple ghostty";
-          icon = "com.mitchellh.ghostty";
-          terminal = false;
-          categories = [ "System" "TerminalEmulator" ];
-          comment = "Fast, feature-rich, and native terminal emulator";
         };
       };
     };

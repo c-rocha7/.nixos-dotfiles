@@ -123,6 +123,7 @@
       nix.settings = {
         auto-optimise-store = true;
         experimental-features = [ "nix-command" "flakes" ];
+        trusted-users = [ "root" "@wheel" ];
       };
 
       nix.gc = {
@@ -135,6 +136,7 @@
 
       environment.sessionVariables = {
         MESA_SHADER_CACHE_MAX_SIZE = "12G";
+        GTK_IM_MODULE = "simple";
       };
 
       system.stateVersion = "26.05";
