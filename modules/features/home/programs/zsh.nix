@@ -4,6 +4,11 @@
   flake.nixosModules.zsh = { pkgs, ... }:
     {
       home-manager.users.cauanixos = {
+        home.sessionVariables = {
+          LANG = "pt_BR.UTF-8";
+          LC_ALL = "pt_BR.UTF-8";
+        };
+
         home.packages = with pkgs; [
           tree
           zsh-powerlevel10k
