@@ -6,6 +6,7 @@
       home-manager.users.cauanixos = {
         home.packages = with pkgs; [
           devenv
+          navicat-premium
         ];
 
         programs.vscode = {
