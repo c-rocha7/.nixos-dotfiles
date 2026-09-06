@@ -3,7 +3,7 @@
 {
   flake.nixosModules.mpv = { pkgs, ... }:
     {
-      home-manager.users.cauanixos = {
+      home-manager.users."7aauac" = {
         programs.mpv = {
           enable = true;
           package = self.packages.${pkgs.stdenv.hostPlatform.system}.myMpv;

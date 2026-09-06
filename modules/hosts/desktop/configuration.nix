@@ -126,7 +126,7 @@
         wireplumber.enable = true;
       };
 
-      users.users."cauanixos" = {
+      users.users."7aauac" = {
         isNormalUser = true;
         description = "Cauã R. Pereira";
         extraGroups = [ "networkmanager" "wheel" "libvirtd" ];

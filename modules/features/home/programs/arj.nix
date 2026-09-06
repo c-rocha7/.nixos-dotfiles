@@ -3,7 +3,7 @@
 {
   flake.nixosModules.arj = { pkgs, ... }:
     {
-      home-manager.users.cauanixos = {
+      home-manager.users."7aauac" = {
         home.packages = with pkgs; [
           arj
         ];

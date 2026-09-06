@@ -3,7 +3,7 @@
 {
   flake.nixosModules.claude-code = { ... }:
     {
-      home-manager.users.cauanixos = {
+      home-manager.users."7aauac" = {
         programs.claude-code = {
           enable = true;
         };

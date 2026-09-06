@@ -3,7 +3,7 @@
 {
   flake.nixosModules.vesktop = { pkgs, ... }:
     {
-      home-manager.users.cauanixos = {
+      home-manager.users."7aauac" = {
         programs.vesktop = {
           enable = true;
           package = pkgs.unstable.vesktop;

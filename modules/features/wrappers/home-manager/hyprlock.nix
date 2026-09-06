@@ -3,7 +3,7 @@
 {
   flake.nixosModules.hyprlock = { pkgs, ... }:
     {
-      home-manager.users.cauanixos = {
+      home-manager.users."7aauac" = {
         programs.hyprlock = {
           enable = true;
           package = self.packages.${pkgs.stdenv.hostPlatform.system}.myHyprlock;
@@ -19,7 +19,7 @@
         settings = {
           background = {
             monitor = "";
-            path = "/home/cauanixos/Discos/ssd-480-gb/Pictures/Wallpapers/a_street_with_buildings_and_trees.png";
+            path = "/home/7aauac/Discos/ssd-480-gb/Pictures/Wallpapers/a_street_with_buildings_and_trees.png";
             contrast = "0.8916";
             brightness = "0.8172";
             vibrancy = "0.1696";

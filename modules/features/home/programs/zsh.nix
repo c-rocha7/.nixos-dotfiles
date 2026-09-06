@@ -3,7 +3,7 @@
 {
   flake.nixosModules.zsh = { pkgs, ... }:
     {
-      home-manager.users.cauanixos = {
+      home-manager.users."7aauac" = {
         home.sessionVariables = {
           LANG = "pt_BR.UTF-8";
           LC_ALL = "pt_BR.UTF-8";

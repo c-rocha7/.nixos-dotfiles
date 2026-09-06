@@ -3,7 +3,7 @@
 {
   flake.nixosModules.btop = { pkgs, ... }:
     {
-      home-manager.users.cauanixos = {
+      home-manager.users."7aauac" = {
         programs.btop = {
           enable = true;
           package = self.packages.${pkgs.stdenv.hostPlatform.system}.myBtop;

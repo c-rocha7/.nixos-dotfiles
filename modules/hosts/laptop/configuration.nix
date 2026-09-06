@@ -97,7 +97,7 @@
         wireplumber.enable = true;
       };
 
-      users.users."cauanixos" = {
+      users.users."7aauac" = {
         isNormalUser = true;
         description = "Cauã Rocha Pereira";
         extraGroups = [ "networkmanager" "wheel" "podman" ];

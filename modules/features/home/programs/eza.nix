@@ -3,7 +3,7 @@
 {
   flake.nixosModules.eza = { ... }:
     {
-      home-manager.users.cauanixos = {
+      home-manager.users."7aauac" = {
         programs.eza = {
           enable = true;
         };

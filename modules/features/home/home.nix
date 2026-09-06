@@ -9,7 +9,7 @@
         extraSpecialArgs = { inherit inputs; };
         backupFileExtension = "backup";
 
-        users.cauanixos = { ... }: {
+        users."7aauac" = { ... }: {
           nixpkgs.config.allowUnfree = true;
           nixpkgs.overlays = [
             (final: prev: {
@@ -20,8 +20,8 @@
             })
           ];
 
-          home.username = "cauanixos";
-          home.homeDirectory = "/home/cauanixos";
+          home.username = "7aauac";
+          home.homeDirectory = "/home/7aauac";
           home.stateVersion = "26.05";
 
           home.packages = with pkgs; [

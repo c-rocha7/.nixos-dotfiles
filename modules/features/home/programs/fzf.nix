@@ -3,7 +3,7 @@
 {
   flake.nixosModules.fzf = { ... }:
     {
-      home-manager.users.cauanixos = {
+      home-manager.users."7aauac" = {
         programs.fzf = {
           enable = true;
           enableZshIntegration = true;

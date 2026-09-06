@@ -3,7 +3,7 @@
 {
   flake.nixosModules.rofi = { pkgs, ... }:
     {
-      home-manager.users.cauanixos = {
+      home-manager.users."7aauac" = {
         programs.rofi = {
           enable = true;
           package = self.packages.${pkgs.stdenv.hostPlatform.system}.myRofi;

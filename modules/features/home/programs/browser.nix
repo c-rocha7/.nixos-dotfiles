@@ -3,7 +3,7 @@
 {
   flake.nixosModules.browsers = { pkgs, ... }:
     {
-      home-manager.users.cauanixos = {
+      home-manager.users."7aauac" = {
         programs.firefox.enable = true;
 
         home.packages = with pkgs; [

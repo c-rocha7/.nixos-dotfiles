@@ -3,7 +3,7 @@
 {
   flake.nixosModules.cava = { pkgs, ... }:
     {
-      home-manager.users.cauanixos = {
+      home-manager.users."7aauac" = {
         programs.cava = {
           enable = true;
           package = self.packages.${pkgs.stdenv.hostPlatform.system}.myCava;

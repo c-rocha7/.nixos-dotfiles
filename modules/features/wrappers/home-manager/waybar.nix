@@ -3,7 +3,7 @@
 {
   flake.nixosModules.waybar = { pkgs, ... }:
     {
-      home-manager.users.cauanixos = {
+      home-manager.users."7aauac" = {
         programs.waybar = {
           enable = true;
           package = self.packages.${pkgs.stdenv.hostPlatform.system}.myWaybar;

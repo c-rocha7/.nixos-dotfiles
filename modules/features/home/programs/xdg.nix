@@ -3,7 +3,7 @@
 {
   flake.nixosModules.xdg = { ... }:
     {
-      home-manager.users.cauanixos = { config, ... }:
+      home-manager.users."7aauac" = { config, ... }:
         {
           xdg = {
             mimeApps = {

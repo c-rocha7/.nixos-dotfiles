@@ -3,7 +3,7 @@
 {
   flake.nixosModules.ghostty = { pkgs, ... }:
     {
-      home-manager.users.cauanixos = {
+      home-manager.users."7aauac" = {
         programs.ghostty = {
           enable = true;
           enableZshIntegration = true;

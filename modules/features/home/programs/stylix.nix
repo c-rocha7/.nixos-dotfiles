@@ -3,7 +3,7 @@
 {
   flake.nixosModules.stylix = { pkgs, ... }:
     {
-      home-manager.users.cauanixos = {
+      home-manager.users."7aauac" = {
         imports = [
           inputs.stylix.homeModules.stylix
         ];

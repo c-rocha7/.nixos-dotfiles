@@ -3,7 +3,7 @@
 {
   flake.nixosModules.kitty = { pkgs, ... }:
     {
-      home-manager.users.cauanixos = {
+      home-manager.users."7aauac" = {
         programs.kitty = {
           enable = true;
           package = self.packages.${pkgs.stdenv.hostPlatform.system}.myKitty;

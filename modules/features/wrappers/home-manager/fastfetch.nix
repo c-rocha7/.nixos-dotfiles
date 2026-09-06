@@ -3,7 +3,7 @@
 {
   flake.nixosModules.fastfetch = { pkgs, ... }:
     {
-      home-manager.users.cauanixos = {
+      home-manager.users."7aauac" = {
         programs.fastfetch = {
           enable = true;
           package = self.packages.${pkgs.stdenv.hostPlatform.system}.myFastfetch;
