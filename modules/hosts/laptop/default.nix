@@ -26,12 +26,12 @@
       /*--- Programs ---*/
       self.nixosModules.bat
       self.nixosModules.browsers
+      self.nixosModules.claude-code
       self.nixosModules.dev
       self.nixosModules.distrobox
       self.nixosModules.eza
       self.nixosModules.fzf
       self.nixosModules.ghostty
-      self.nixosModules.glaDesktopItem
       self.nixosModules.nil
       self.nixosModules.nixd
       self.nixosModules.nixpkgsFmt
@@ -48,7 +48,6 @@
       self.nixosModules.btop
       self.nixosModules.cava
       self.nixosModules.fastfetch
-      self.nixosModules.kitty
       self.nixosModules.mpv
       self.nixosModules.yazi
     ];
